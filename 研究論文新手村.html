@@ -1,0 +1,2312 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paper Quest｜健康數據科學・課堂圖解篇</title>
+<meta name="description" content="依三份健康數據科學教材設計的 48 題圖解練習，附逐項詳解與教材頁碼，另保留 30 題論文閱讀挑戰。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23121f25'/%3E%3Cpath d='M20 12h20l8 8v32H20z' fill='%2394efcd'/%3E%3Cpath d='M27 29h14M27 36h14M27 43h9' stroke='%23121f25' stroke-width='3'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:dark;--bg:#10191e;--panel:#19262c;--line:#33454b;--ink:#eef5f2;--muted:#a9babd;--mint:#a5efcc;--yellow:#f4d88d;--red:#ffa9a3}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif;font-size:16px;line-height:1.7}button,a{ -webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}button:disabled{cursor:default}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--yellow);outline-offset:5px}a{color:var(--mint)}.shell{max-width:1200px;margin:auto;padding:0 32px}header{height:92px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:14px}.brand{font-size:21px;font-weight:850;letter-spacing:-.5px;display:flex;align-items:center;gap:12px}.mark{width:35px;height:39px;background:var(--mint);color:var(--bg);display:grid;place-items:center;border-radius:5px;font-size:23px;transform:rotate(-7deg)}.tag,.eyebrow{font-family:ui-monospace,monospace;font-size:13px;letter-spacing:2px;color:var(--mint)}.tag{border:1px solid var(--line);padding:5px 12px;border-radius:30px;letter-spacing:1px}.layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:46px;padding:38px 0 48px}aside{border-right:1px solid var(--line);padding-right:28px}.small{font-size:14px;color:var(--muted)}.journey{list-style:none;padding:0;margin:24px 0}.journey li{display:flex;gap:13px;align-items:center;position:relative;padding:0 0 26px;color:var(--muted);font-size:15px}.journey li:not(:last-child):before{content:"";position:absolute;left:18px;top:40px;bottom:4px;border-left:1px dashed var(--line)}.node{width:38px;height:38px;flex-shrink:0;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;font-family:monospace;font-size:14px}.journey .active{color:var(--ink)}.active .node{background:var(--mint);border-color:var(--mint);color:#162621;box-shadow:0 0 24px #a5efcc17}.done .node{color:var(--mint);border-color:var(--mint)}.journey small{display:block;font-size:12px;letter-spacing:1px;color:var(--muted)}.botbox{border:1px solid var(--line);border-radius:16px;padding:18px;background:#1c2b30}.bot{display:inline-flex;width:45px;height:34px;border:2px solid var(--mint);border-radius:10px;align-items:center;justify-content:center;gap:9px;position:relative;margin:8px 0;color:var(--mint)}.bot:before{content:"";width:2px;height:8px;position:absolute;top:-9px;background:var(--mint)}.bot i{width:5px;height:7px;background:var(--mint);border-radius:4px}.botbox p{font-size:14px;margin:7px 0 0;color:#c6d6d7}.stats{display:flex;gap:20px;align-items:center;margin-bottom:22px}.stat strong{font-family:ui-monospace,monospace;font-size:20px;color:var(--mint)}.progresswrap{flex:1;margin-left:10px}.progresslabel{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:5px}progress{display:block;width:100%;height:6px;border:0;border-radius:6px;overflow:hidden;background:#2a3c42}progress::-webkit-progress-bar{background:#2a3c42}progress::-webkit-progress-value{background:var(--mint);transition:width .4s}progress::-moz-progress-bar{background:var(--mint)}h1{font-size:clamp(32px,4.2vw,52px);line-height:1.24;letter-spacing:-1px;margin:16px 0 20px}h1 span{color:var(--mint)}h2{font-size:25px;line-height:1.5;margin:12px 0 22px}h3{font-size:18px;margin:8px 0}p{margin:12px 0}.lead{color:var(--muted);max-width:520px}.hero{position:relative;min-height:310px;padding-right:190px}.paperart{position:absolute;right:20px;top:55px;width:145px;height:182px;transform:rotate(9deg);border-radius:8px;background:#dfece2;padding:24px 17px;box-shadow:10px 12px 0 #2c4945;color:#274139}.paperart b{font-size:13px;font-family:monospace;letter-spacing:2px}.paperart .line{height:5px;background:#95b6a6;margin:12px 0;width:100%}.paperart .line:nth-child(3){width:70%}.paperart .seal{position:absolute;right:-18px;bottom:18px;width:55px;height:55px;background:var(--yellow);border:4px solid var(--bg);border-radius:50%;display:grid;place-items:center;font-size:24px}.story{border-left:3px solid var(--mint);padding:14px 20px;background:#1a292e;margin:18px 0 26px;border-radius:0 10px 10px 0}.story p{margin:6px 0}.primary{border:0;border-radius:10px;padding:13px 24px;background:var(--mint);font-weight:750;color:#142820;box-shadow:0 4px 0 #5d9d80}.primary:hover{background:#c0ffdf;transform:translateY(-1px)}.secondary{border:1px solid var(--line);border-radius:10px;padding:10px 16px;background:transparent;color:var(--ink)}.secondary:hover{border-color:var(--mint);background:#24353a}.startrow{display:flex;gap:20px;align-items:center;flex-wrap:wrap}.features{display:flex;gap:23px;margin-top:27px;padding-top:21px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}.features b{color:var(--ink)}.card{background:var(--panel);border:1px solid var(--line);padding:28px;border-radius:18px}.qtop{display:flex;justify-content:space-between;align-items:center;gap:12px}.pill{font-size:12px;color:var(--yellow);border:1px solid #665a37;padding:3px 10px;border-radius:20px;white-space:nowrap}.passage{background:#111e24;border:1px solid #31444b;border-radius:10px;padding:18px;color:#cbdad9;font-size:15px;margin:18px 0}.passage b{color:var(--mint)}.options{display:grid;gap:11px;margin-top:22px}.option{width:100%;text-align:left;padding:14px 16px;border:1px solid #41535a;border-radius:11px;background:#1c2b31;color:var(--ink);display:flex;align-items:flex-start;gap:13px;line-height:1.65}.letter{font-family:monospace;font-weight:bold;display:grid;place-items:center;min-width:28px;height:28px;background:#2f4249;border-radius:6px}.option:not(:disabled):hover{border-color:var(--mint);background:#263c40}.option.correct{border-color:var(--mint);background:#203e34}.option.wrong{border-color:var(--red);background:#3c292c}.option:disabled:not(.correct):not(.wrong){opacity:.65}.feedback{border-radius:12px;margin-top:22px;padding:19px;background:#213b33;border:1px solid #507865}.feedback.bad{background:#3c2d2b;border-color:#8b6057}.feedback h3{color:var(--mint)}.feedback.bad h3{color:var(--yellow)}.feedback p{margin-bottom:0}.actions{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:22px;flex-wrap:wrap}.hint{padding:12px 16px;border-radius:10px;background:#363323;color:#f5dda3;font-size:15px;margin-top:15px}.chart{background:#132228;padding:12px;border-radius:12px;margin:18px 0}.chart svg{display:block;width:100%;height:auto;max-height:265px}.chart text{font-family:system-ui,sans-serif;font-size:14px;fill:#c6d9dc}.resultscore{display:flex;gap:24px;align-items:center;margin:26px 0}.scorecircle{width:125px;height:125px;flex-shrink:0;border:5px solid var(--mint);border-radius:50%;display:grid;place-content:center;text-align:center}.scorecircle strong{font-size:35px;line-height:1.1;color:var(--mint)}.summarygrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:24px 0}.summaryitem{background:#203038;padding:12px 16px;border-radius:10px;display:flex;justify-content:space-between;gap:10px}.summaryitem b{color:var(--mint);white-space:nowrap}details{border-top:1px solid var(--line);padding:16px 0}summary{cursor:pointer;color:var(--ink)}.review{border-bottom:1px solid var(--line);padding:13px 0}.review p{font-size:14px;color:var(--muted)}footer{padding:18px 0 26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;color:var(--muted);font-size:12px}.fade{animation:enter .3s ease}@keyframes enter{from{opacity:.2;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}[hidden]{display:none!important}button:disabled.primary{opacity:.5} @media(max-width:850px){.layout{gap:24px;grid-template-columns:190px minmax(0,1fr)}aside{padding-right:20px}.hero{padding-right:0}.paperart{display:none}.shell{padding:0 22px}.card{padding:22px}.brand{font-size:19px}}@media(max-width:640px){header{height:75px}.tag{font-size:11px}.layout{display:flex;flex-direction:column;padding-top:22px;gap:22px}aside{border:0;padding:0}.maptitle,.botbox{display:none}.journey{display:flex;justify-content:space-between;margin:0}.journey li{padding:0}.journey li:before,.journey .label{display:none}.node{width:39px;height:39px}.stats{gap:16px}.stat strong{font-size:17px}.small{font-size:13px}.progresswrap{margin-left:0}.hero{min-height:0}h1{font-size:37px}.story{font-size:15px}.features{gap:14px;font-size:12px}.card{padding:19px}.shell{padding:0 18px}.summarygrid{grid-template-columns:1fr}h2{font-size:22px}.resultscore{gap:18px}.scorecircle{width:104px;height:104px}footer{flex-direction:column;gap:3px}.qtop .eyebrow{font-size:11px;letter-spacing:1px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.visual-scroll{overflow-x:auto;overscroll-behavior-x:contain}.visual-scroll svg{min-width:420px}.mode-picker{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:25px 0}.mode{background:#18282f;border:1px solid var(--line);border-radius:12px;color:var(--ink);text-align:left;padding:17px}.mode b{display:block;font-size:18px}.mode span{display:block;font-size:14px;color:var(--muted);margin-top:5px}.mode.selected{border-color:var(--mint);background:#233c35}.mode.selected b{color:var(--mint)}.learning-figure{margin:24px 0;padding:16px;border:1px solid #3d5961;border-radius:13px;background:#112229;color:var(--ink)}.learning-figure figcaption{font-weight:700;font-size:16px;margin-bottom:14px;color:var(--mint)}.learning-figure svg{width:100%;height:auto;display:block;max-width:560px;margin:auto}.learning-figure svg text{font-family:system-ui,"Microsoft JhengHei",sans-serif}.learning-figure .figure-note{font-size:12px;color:#afc3c7;margin:9px 0 0}.learning-figure .small{font-size:14px;margin:10px 0 0}.tablewrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.6}th,td{text-align:left;border-bottom:1px solid #3e555e;padding:12px 10px;min-width:75px}thead th{color:var(--mint);background:#1b3339}tbody th{font-weight:500}.errorcell{color:var(--yellow)}.explain-steps h4,.option-reasons h4{font-size:17px;margin:22px 0 10px}.explain-steps ol{padding-left:25px}.explain-steps li{margin:10px 0}.option-reasons p{padding:10px 0;border-bottom:1px solid #ffffff16;font-size:15px}.option-reasons b{color:var(--mint);margin-right:8px}.source-note{margin-top:18px;padding:14px 16px;background:#101e23;border-radius:10px;font-size:13px;color:#b1c8c9}.source-note b,.source-note span{display:block}.source-note b{color:var(--mint);margin-bottom:5px}.source-list p{overflow-wrap:anywhere}.next-row{justify-content:flex-end}.next-row span{font-size:13px;color:var(--muted);margin-right:auto}.feedback{scroll-margin-top:20px}.review-toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-top:25px}.review-toolbar label{font-size:14px;cursor:pointer}.review-toolbar input{accent-color:var(--mint);width:18px;height:18px;vertical-align:middle;margin-right:6px}.review summary{font-size:16px;line-height:1.6}.review p{font-size:16px;color:var(--ink)}.review .small{font-size:14px;color:var(--muted)}.source-list b{color:var(--mint)}.summarygrid .summaryitem{font-size:15px}
+@media(max-width:640px){.mode-picker{grid-template-columns:1fr}.learning-figure{padding:10px;margin-left:-5px;margin-right:-5px}.feedback{padding:14px}.learning-figure figcaption{font-size:15px}.explain-steps ol{padding-left:20px}th,td{padding:9px 7px;font-size:14px}.qtop{align-items:flex-start}.source-note{font-size:13px;padding:12px}.summarygrid{grid-template-columns:1fr}.option-reasons p{font-size:15px}}
+
+</style>
+</head>
+<body><div class="shell"><header><div class="brand"><span class="mark" aria-hidden="true">▤</span> PAPER QUEST</div><span class="tag">研究論文新手村</span></header><div class="layout"><aside><div class="eyebrow maptitle">YOUR RESEARCH JOURNEY</div><ol class="journey" id="map" aria-label="六個關卡進度"></ol><div class="botbox"><div class="bot" aria-hidden="true"><i></i><i></i></div><h3>Paper Bot <span class="small">／ 你的研究嚮導</span></h3><p id="botText">論文不是一口氣讀完的。拆成小任務，我們一起來！</p></div></aside><main id="main"><div class="stats"><div class="stat"><div class="small">Research XP</div><strong id="xp">0 / 960</strong></div><div class="stat"><div class="small">研究者 Level</div><strong id="level">Lv. 0</strong></div><div class="progresswrap"><div class="progresslabel"><span>冒險進度</span><span id="progressText">0 / 48</span></div><progress id="progress" value="0" max="48" aria-label="已完成題數">0 / 48</progress></div></div><div id="screen"></div></main></div><footer><span>PAPER QUEST · 把課堂概念，變成研究判讀能力。</span><span>教材主題改編 · 原創教學圖解 · 無須登入</span></footer></div><noscript>請開啟瀏覽器的 JavaScript，才能進行互動遊戲。</noscript>
+<script>
+'use strict';
+const classicStages=[['論文地圖','PAPER STRUCTURE'],['摘要解碼','ABSTRACT'],['研究設計偵探','STUDY DESIGN'],['統計魔王','STATISTICS'],['圖表觀測站','DATA VISUALS'],['迷你 Paper 挑戰','FINAL QUEST']];
+const abstract='<b>練習摘要｜每週閱讀練習能幫助新生嗎？</b><br>背景：研究所新生常不熟悉論文閱讀。方法：將 80 名新生隨機分為閱讀工作坊與自學組，持續 4 週。結果：工作坊組的閱讀測驗平均分數較高。結論：工作坊可能改善短期閱讀表現，但仍需評估長期效果。';
+const mini='<b>迷你 Paper｜晨間步行與睡眠（虛構）</b><br>研究問題：晨間步行是否與較少睡眠困擾有關？<br>方法：追蹤某校 200 名自願參與的新生 8 週，依原本有無晨間步行習慣分組，並非隨機分派。<br>結果：步行組 20/100 人出現睡眠困擾；非步行組 30/100 人出現睡眠困擾。未調整 RR = 0.67，95% CI 0.41–1.09。<br>限制：自填問卷，未控制課業壓力、咖啡因攝取等因素。';
+const classicQuestions=[
+{stage:0,title:'想知道「研究怎麼做」，該翻到哪裡？',body:'你想確認研究收了哪些人、如何分組，以及測量了什麼。',options:['Introduction｜前言','Methods｜研究方法','Discussion｜討論'],answer:1,hint:'找描述「對象、流程、測量與分析」的段落。',explain:'Methods 告訴你研究如何進行。Introduction 說明為什麼研究；Results 呈現發現；Discussion 解釋意義與限制。先找對段落，閱讀就不必大海撈針。'},
+{stage:0,title:'第一次拿到陌生論文，你會怎麼開始？',body:'目標：先判斷這篇論文與你的研究問題是否相關。',options:['先看 Title、Abstract 與圖表，再依問題深入 Methods、Results','從 References 第一筆開始全部背起來','只看結論，直接當成已證實的事實'],answer:0,hint:'先掌握全貌，再驗證細節；沒有適用所有論文的唯一順序。',explain:'先看標題、摘要與圖表，可以快速定位研究問題。接著讀方法與結果，才能判斷作者結論是否有根據。閱讀順序可依目的調整；Discussion 不能取代證據。'},
+{stage:1,title:'這篇研究真正想回答什麼？',passage:abstract,options:['所有研究生都不會閱讀嗎？','哪一本期刊的排名最高？','閱讀工作坊是否能改善新生的閱讀表現？'],answer:2,hint:'把「誰、接受什麼、和誰比較、觀察什麼」串起來。',explain:'研究問題聚焦於新生、工作坊與自學的比較，以及閱讀表現。讀摘要時，試著用一句話整理對象、介入／暴露、比較組與結果，也就是常用的 PICO 思考架構。'},
+{stage:1,title:'哪一句屬於 Results，而不是作者的推論？',passage:abstract,options:['工作坊可能改善短期閱讀表現','工作坊組的閱讀測驗平均分數較高','仍需評估長期效果'],answer:1,hint:'Results 是觀察到什麼；Conclusion 是如何解釋它。',explain:'「平均分數較高」描述研究觀察；「可能改善」是解釋。摘要通常很精簡，還要回到正文確認差距多大、不確定性與研究限制，不能只靠這句話判定成效。'},
+{stage:2,title:'研究者用抽籤決定分組，這是什麼設計？',body:'研究者隨機分派參與者接受 A 課程或 B 課程，再比較閱讀能力。',options:['隨機對照試驗（RCT）','世代研究（Cohort study）','病例對照研究（Case-control study）'],answer:0,hint:'關鍵不只是「兩組」，而是研究者有沒有隨機分派介入。',explain:'RCT 的核心是隨機分派介入，有助減少組間混雜。它仍可能受到失訪、執行方式等影響；「隨機分派」也不等於從全人口「隨機抽樣」。'},
+{stage:2,title:'兩位偵探，誰在做世代研究？',body:'甲：先依有無熬夜分組，追蹤一年後的頭痛。乙：先找有頭痛與沒有頭痛的人，回頭比較過去熬夜情形。',options:['甲是病例對照；乙是世代研究','兩個都是 RCT','甲是世代研究；乙是病例對照'],answer:2,hint:'看選人的起點：暴露狀態，還是有沒有結果／疾病？',explain:'世代研究以暴露分組，觀察結果；病例對照以有無疾病／結果選人，再比較過去暴露。兩者都是觀察性設計，不能因看見關聯就直接認定因果。世代研究也可以使用既有紀錄回溯進行。'},
+{stage:3,title:'p = 0.03，究竟在說什麼？',body:'研究事先設定 α = 0.05，檢定「兩組沒有差異」的虛無假設。',options:['虛無假設只有 3% 的機率是真的','在虛無假設及檢定假設成立時，出現目前或更極端資料的機率為 3%','有 97% 的人會因介入而改善'],answer:1,hint:'p-value 是在假設成立的前提下看資料，不是直接計算假設為真的機率。',explain:'p = 0.03 達到事先設定的 0.05 門檻，但不代表效果大或實際重要，也不是「有 3% 機率研究做錯」。還要一起看效應量、信賴區間與研究品質。'},
+{stage:3,title:'95% 信賴區間，是什麼意思？',body:'想像用相同方法反覆抽樣，每次都建立一個 95% 信賴區間（CI）。',options:['在模型與抽樣假設成立時，長期約 95% 的這類區間會涵蓋真實參數','95% 的參與者分數都落在這個區間','這篇研究有 95% 的機率完全沒有偏誤'],answer:0,hint:'95% 描述的是反覆使用這種方法的涵蓋率。',explain:'CI 呈現估計的不確定性；區間較寬通常代表估計較不精確。它不能保證沒有偏誤，也不是描述個別受試者的範圍。傳統頻率學派不把已算出的區間解釋成參數有 95% 機率在其中。'},
+{stage:3,title:'RR 和 OR，是同一回事嗎？',body:'A 組事件風險 20%，B 組 40%。RR = 0.20 / 0.40 = 0.50；OR = (0.20 / 0.80) / (0.40 / 0.60) ≈ 0.375。',options:['OR 與 RR 永遠一樣，可互換','RR = 0.50 代表少了 50 個百分點','RR 比較風險；OR 比較勝算，不能直接互換'],answer:2,hint:'風險是 p；勝算是 p / (1 − p)。比較的量不同。',explain:'這裡 A 組風險是 B 組的一半（相對少 50%），絕對差是 20 個百分點。OR 比較勝算，事件常見時可能與 RR 差很多；事件罕見時才常較接近。比值為 1 代表兩組相同。'},
+{stage:3,title:'HR = 0.70，可以直接說存活率多 30% 嗎？',body:'研究在比例風險假設下，報告 A 組相對 B 組的死亡風險比 HR = 0.70。',options:['可以，任何時間點存活率都多 30%','不可以；它比較仍未發生事件者當下的事件發生速率','可以，而且每個人壽命都延長 30%'],answer:1,hint:'Hazard 關注事件發生的時間，不是固定期間的累積機率。',explain:'在比例風險假設下，HR = 0.70 表示 A 組仍存活者的瞬時死亡風險約為 B 組的 0.70 倍。它不是存活機率比，也不代表壽命增加。解讀時仍需看 CI、追蹤時間與模型假設。'},
+{stage:4,title:'森林圖裡，哪個結果仍包含「無差異」？',chart:'forest',options:['研究 A：RR 0.60，95% CI 0.40–0.90','研究 B：RR 0.90，95% CI 0.60–1.35','兩個區間都沒有包含 1'],answer:1,hint:'RR、OR、HR 的無差異值是 1；看橫線是否穿過它。',explain:'研究 B 的 CI 跨過 1，資料仍相容於風險較低、無差異或較高。不能說「證明無效」。森林圖的點是估計值，橫線是 CI；A 未跨 1，也不自動代表效果重要或沒有偏誤。'},
+{stage:4,title:'Kaplan–Meier 曲線，在 6 個月告訴你什麼？',chart:'km',options:['A 組估計存活率較高；但單看曲線不能證明因果或統計顯著','A 組每個人都比 B 組多活 2 個月','曲線上的 + 代表死亡'],answer:0,hint:'先讀軸線，再比較同一時間的高度。+ 表示設限，不是事件。',explain:'6 個月時 A 組估計存活率為 80%，B 組為 60%。Kaplan–Meier 曲線呈現尚未發生事件的估計機率；階梯下降代表事件，+ 表示設限（例如追蹤結束或失訪）。設限者之後的結果未知，不能當成永遠沒事件；還要看在險人數、CI 與組間比較。'},
+{stage:5,title:'最終任務 ①｜這是哪一種研究？',passage:mini,options:['RCT，因為有兩組','病例對照，因為有睡眠困擾者','世代研究，從原有步行習慣出發追蹤結果'],answer:2,hint:'這裡沒有隨機分派，也不是先依睡眠困擾挑選病例。',explain:'研究先按既有步行習慣分組，再追蹤睡眠困擾，是觀察性世代研究。兩組可能原本就在壓力或生活習慣上不同，這些混雜因素會影響解讀。'},
+{stage:5,title:'最終任務 ②｜RR = 0.67，CI 跨過 1，怎麼讀？',passage:mini,options:['已證明步行完全沒有幫助','點估計顯示較低風險，但區間也包含無差異與稍高風險','67% 的步行者一定會有睡眠困擾'],answer:1,hint:'點估計只是最佳估計；0.41–1.09 是不確定性範圍。',explain:'點估計約為相對低 33%；本樣本的絕對風險差是 10 個百分點。CI 包含 1，不能確定差異方向，也不能宣稱兩組相同。樣本數、資料品質與混雜都需要納入判斷。'},
+{stage:5,title:'最終任務 ③｜你會怎麼向教授報告？',passage:mini,options:['本研究觀察到步行與較少睡眠困擾相關，但估計不精確且可能有混雜，不能確立因果','所有研究生只要步行，就能治好睡眠問題','只要作者結論說有效，就不需要看方法'],answer:0,hint:'把「研究問題、設計、結果、不確定性、限制」都帶進結論。',explain:'好的報告能區分觀察結果與因果主張。本研究只有單校自願參與者，外推也要小心。你已經學會：先找問題、理解設計、讀懂數據，再評估限制，而不是只抄摘要結論。'}
+];
+
+const advancedQuestions=[
+  {
+    "stage": 0,
+    "title": "作者的結論，真的有數據支持嗎？",
+    "body": "Discussion 宣稱課程能提升「長期能力」，但 Results 只呈現課程結束當天的測驗。",
+    "options": [
+      "只要結論經過同儕審查，就能當成長期成效",
+      "回查測量時間；當天測驗不足以支持長期成效",
+      "只需增加摘要字數，便能補足證據"
+    ],
+    "answer": 1,
+    "hint": "主張的時間範圍，要和實際追蹤時間對得上。",
+    "explain": "結論必須對應實際測量的結果與時間。當天測驗可以支持短期表現的描述，但要談持續效果，仍需後續追蹤；合理的推測不等於已經取得的證據。",
+    "difficulty": "進階推理"
+  },
+  {
+    "stage": 0,
+    "title": "納入條件，會影響哪一種判斷？",
+    "body": "Methods 說明只納入某校、英語能力較佳的新生。你想把結果用於所有研究生。",
+    "options": [
+      "只影響文章長度",
+      "代表研究結果必定錯誤",
+      "需要評估研究對象與目標族群的差異"
+    ],
+    "answer": 2,
+    "hint": "研究做得好，和結果適用於誰，是不同問題。",
+    "explain": "納入條件幫助判斷外部效度，也就是結果能否適用到其他人與情境。樣本較特定不等於研究無效，但不宜直接推廣到背景差異很大的族群。",
+    "difficulty": "進階推理"
+  },
+  {
+    "stage": 0,
+    "title": "摘要與表格的樣本數不一致，怎麼辦？",
+    "body": "摘要寫收案 120 人，主要結果表只有 96 人。",
+    "options": [
+      "回查流程圖、排除原因與各項分析的分母",
+      "直接把 120 改成 96，再繼續引用",
+      "認定作者一定造假"
+    ],
+    "answer": 0,
+    "hint": "收案人數、完成追蹤人數、進入分析人數可能不同。",
+    "explain": "先追查 24 人為何未出現在分析中，是否失訪或缺少測量，以及如何處理缺失資料。數字不同不一定是錯誤，但若原因與結果有關，就可能影響估計。",
+    "difficulty": "進階推理"
+  },
+  {
+    "stage": 1,
+    "title": "摘要寫「提高 50%」，你還缺什麼？",
+    "body": "摘要宣稱測驗通過率提高 50%，卻沒有提供兩組人數或原始通過率。",
+    "options": [
+      "只要是百分比，就已經足夠清楚",
+      "需要兩組原始比例、分母，以及這是相對還是絕對差異",
+      "代表每班固定多 50 個人通過"
+    ],
+    "answer": 1,
+    "hint": "從 20% 到 30%，和從 40% 到 60%，都可以是相對增加 50%。",
+    "explain": "相對百分比無法單獨呈現實際差距。確認原始比例、樣本數與不確定性，才能理解結果的大小；「提高 50%」也不等於提高 50 個百分點。",
+    "difficulty": "進階推理"
+  },
+  {
+    "stage": 1,
+    "title": "「沒有顯著差異」能寫成「兩種方法一樣好」嗎？",
+    "body": "摘要報告 A 與 B 課程比較 p = 0.18，沒有提供信賴區間或等效性設計。",
+    "options": [
+      "可以，p 大於 0.05 就代表完全相同",
+      "可以，只要兩組人數相同",
+      "不行；沒有足夠證據顯示差異，不等於證明等效"
+    ],
+    "answer": 2,
+    "hint": "未找到差異，也可能是估計太不精確。",
+    "explain": "要主張等效，通常需要事先界定可接受的差異範圍，並採適當設計與分析。單一 p = 0.18 無法區分「真的接近」與「資料不足」。",
+    "difficulty": "進階推理"
+  },
+  {
+    "stage": 1,
+    "title": "哪一段資訊最適合補進這份摘要？",
+    "body": "摘要只說「新教材成效良好」。你要讓讀者更容易評估研究。",
+    "options": [
+      "補上設計、樣本、主要結果的組間差異與 CI",
+      "增加「突破性」與「極具價值」等形容詞",
+      "只補上作者的學歷"
+    ],
+    "answer": 0,
+    "hint": "讀者需要能判斷證據的資訊，不只是評價。",
+    "explain": "清楚摘要應交代研究問題、怎麼做、觀察到多少差異，以及結論的適用範圍。具體效應量與 CI 比「成效良好」更容易檢查，也有助避免過度宣稱。",
+    "difficulty": "進階推理"
+  },
+  {
+    "stage": 2,
+    "title": "隨機分派後，只分析有上完課的人？",
+    "body": "RCT 中，較忙或覺得課程無用的人較容易退課。作者只比較兩組完成課程者。",
+    "options": [
+      "仍然完全保有隨機分派的優點",
+      "退課者沒有結果，所以永遠不會造成偏誤",
+      "排除退課者可能破壞組間可比性，需要檢查分析方式"
+    ],
+    "answer": 2,
+    "hint": "完成課程不是隨機決定的，也可能和結果相關。",
+    "explain": "若目的是估計分派課程的效果，意向治療分析（ITT）原則上按原分派組別納入所有隨機分派者。缺失結果仍需適當處理；只分析完成者不能自動消除偏誤。",
+    "difficulty": "進階推理"
+  },
+  {
+    "stage": 2,
+    "title": "咖啡與失眠相關，壓力可能扮演什麼角色？",
+    "body": "假設壓力會讓人喝更多咖啡，也會直接影響睡眠，而且壓力不是喝咖啡造成的。",
+    "options": [
+      "可能是混雜因素，需在設計或分析時考慮",
+      "一定是咖啡導致失眠的中介變項",
+      "只要樣本大，壓力便不影響結果"
+    ],
+    "answer": 0,
+    "hint": "它同時影響暴露與結果，且不在這裡設定的因果路徑中。",
+    "explain": "依題目假設，壓力可能使咖啡與睡眠的關聯混入其他影響。蒐集並適當控制混雜因素有幫助，但調整後仍可能有未測量的混雜，不能保證得到因果效果。",
+    "difficulty": "進階推理"
+  },
+  {
+    "stage": 2,
+    "title": "同一天量到運動量與心情，能判斷先後嗎？",
+    "body": "一份橫斷面問卷發現運動較多的人心情較好。",
+    "options": [
+      "已證明運動改善心情",
+      "可能是運動影響心情，也可能是心情影響運動，尚無法確定",
+      "已證明心情不可能影響運動"
+    ],
+    "answer": 1,
+    "hint": "同一時間測量，通常缺乏清楚的時間先後。",
+    "explain": "橫斷面研究可描述當下關聯，但很難單靠它確定方向。除了反向因果，也可能有其他共同原因，例如身體健康同時影響運動與心情。",
+    "difficulty": "進階推理"
+  },
+  {
+    "stage": 3,
+    "title": "p 很小，效果就一定值得採用？",
+    "body": "大型研究發現新教材讓百分制成績平均提高 0.4 分，95% CI 0.2–0.6，p 小於 0.001；教材價格卻高很多。",
+    "options": [
+      "一定值得，因為 p 小於 0.001",
+      "需評估 0.4 分是否有實際意義，以及成本與其他結果",
+      "p 小於 0.001 代表進步至少 10 分"
+    ],
+    "answer": 1,
+    "hint": "統計可辨識的差異，和值得付出成本的差異並不相同。",
+    "explain": "這份結果估計精確，但改善幅度小。採用決策仍要考慮事先認定有意義的差距、成本與適用情境，不能只看是否達到顯著門檻。",
+    "difficulty": "進階推理"
+  },
+  {
+    "stage": 4,
+    "title": "森林圖：A 顯著、B 不顯著，能說 A 優於 B 嗎？",
+    "body": "兩項獨立研究的 RR 如圖。有人因 A 的 CI 未跨 1、B 跨 1，就說兩項研究效果一定不同。",
+    "options": [
+      "可以；一個顯著、一個不顯著就是差異顯著",
+      "只比較點估計，完全不用管不確定性",
+      "不行；需要適當的效果差異檢定，並考慮研究是否可比較"
+    ],
+    "answer": 2,
+    "hint": "「顯著性不同」不等於「兩個效果之差顯著」。",
+    "explain": "各研究與無差異值的比較，並不是兩項效果彼此的比較。應直接估計效果之差的不確定性，且研究族群、設計等差異也會影響可比性。",
+    "difficulty": "進階推理",
+    "chart": "forest"
+  },
+  {
+    "stage": 4,
+    "title": "Kaplan–Meier 尾端差很大，就更可信？",
+    "body": "假設追蹤後期，A 組在險人數只剩 4 人，B 組只剩 3 人，但兩條曲線距離變大。",
+    "options": [
+      "證據通常更穩定，因為追蹤越久越準",
+      "後期估計可能不穩，應查看在險人數與 CI",
+      "在險人數少，表示所有人的結果都已完整知道"
+    ],
+    "answer": 1,
+    "hint": "尾端的曲線可能只由極少數仍在追蹤的人支撐。",
+    "explain": "在險人數是當時仍未發生事件且仍在觀察的人數。人數很少時，少數事件就可能造成曲線明顯下降；尾端差異應配合 CI 與設限情形解讀。",
+    "difficulty": "進階推理"
+  },
+  {
+    "stage": 4,
+    "title": "兩條存活曲線交叉，單一 HR 夠嗎？",
+    "body": "早期 A 組曲線較高，後期卻低於 B 組；作者只報告一個固定 HR。",
+    "options": [
+      "需要檢查比例風險假設，效果可能隨時間改變",
+      "代表圖畫錯了，存活曲線不可能交叉",
+      "單一 HR 一定完整代表所有時間點"
+    ],
+    "answer": 0,
+    "hint": "固定比例的摘要，可能掩蓋早晚效果不同。",
+    "explain": "曲線交叉是值得檢查的線索，但不能單靠圖就斷定違反假設。應檢查模型，必要時採適當的時間變動效果或其他摘要，避免把一個 HR 當成所有時點都相同的關係。",
+    "difficulty": "進階推理"
+  },
+  {
+    "stage": 5,
+    "title": "最終任務 ④｜如果加入壓力調整，結果改變？",
+    "body": "延伸分析：調整課業壓力等因素後，RR 從 0.67 變為 0.92，95% CI 0.65–1.30。",
+    "options": [
+      "調整後必定就是真正的因果效果",
+      "原來的關聯可能部分來自混雜，但仍要檢查調整變項與模型",
+      "因為估計值改變，必定是作者算錯"
+    ],
+    "answer": 1,
+    "hint": "調整能改變估計，卻不是讓研究自動升級成 RCT。",
+    "explain": "這種變化提示混雜可能重要；仍需考慮為何選這些變項、測量是否準確及是否漏掉共同原因。調整後區間也跨過 1，不宜宣稱已證實保護效果。",
+    "difficulty": "進階推理",
+    "passage": "__MINI__"
+  },
+  {
+    "stage": 5,
+    "title": "最終任務 ⑤｜哪個後續研究最能補強因果推論？",
+    "body": "目標是進一步評估「鼓勵晨間步行」對睡眠的效果，並假設隨機分派可行且符合倫理。",
+    "options": [
+      "只增加同一份觀察研究的宣傳力度",
+      "只招募原本睡得很好、喜歡步行的人",
+      "事先指定主要結果，隨機分派步行方案，完整追蹤並透明報告"
+    ],
+    "answer": 2,
+    "hint": "讓分組少受原本生活習慣影響，同時降低選擇性報告與失訪問題。",
+    "explain": "可行的 RCT 有助減少基線混雜，但仍需關注依從性、缺失結果、測量與外推性。事先指定結果並透明報告，能讓證據更容易被檢查；也要區分分派方案與實際遵從方案的效果。",
+    "difficulty": "進階推理",
+    "passage": "__MINI__"
+  }
+];
+advancedQuestions.forEach(q=>{if(q.passage==="__MINI__")q.passage=mini;});
+classicQuestions.forEach(q=>q.difficulty=q.stage===5?"綜合應用":"基礎暖身");
+classicQuestions.push(...advancedQuestions);
+classicQuestions.sort((a,b)=>a.stage-b.stage);
+
+const courseQuestions=[
+  {
+    "stage": 0,
+    "title": "先有資料，還是先有研究問題？",
+    "body": "你拿到門診、住院與處方資料，想研究某藥物與一年內再住院的關係。第一步最合理的是？",
+    "options": [
+      "先把全部變數放進模型，再挑顯著的結果",
+      "定義對象、用藥比較、追蹤起點與再住院事件",
+      "資料越多越好，不必先限定研究範圍"
+    ],
+    "answer": 1,
+    "steps": [
+      "明確的問題決定需要哪些資料與變數。",
+      "先定義研究對象、暴露、比較組、結果與追蹤時間，才能建立可重現的世代。"
+    ],
+    "why": [
+      "事後挑結果容易形成選擇性報告。",
+      "正確：定義先行，讓資料整理與分析有一致目標。",
+      "大資料仍可能有不適用的欄位與偏誤。"
+    ],
+    "hint": "把研究問題拆成「誰、比較什麼、觀察什麼、追蹤多久」。",
+    "source": [
+      [
+        1,
+        "6–9、14–17"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "研究問題如何變成分析計畫",
+      "items": [
+        "對象與比較",
+        "定義事件／起點",
+        "整理追蹤資料",
+        "選擇分析方法"
+      ]
+    },
+    "difficulty": "基礎暖身",
+    "id": "C01"
+  },
+  {
+    "stage": 0,
+    "title": "想研究基因與生活型態，哪種資料最貼近？",
+    "body": "研究問題聚焦基因變異、吸菸與疾病的關聯。以下哪個起點最符合教材介紹？",
+    "options": [
+      "只用處方領藥紀錄就能直接取得所有基因資料",
+      "只看醫院每月總人次",
+      "先評估 Taiwan Biobank 的基因與生活型態資料，再確認連結與使用條件"
+    ],
+    "answer": 2,
+    "steps": [
+      "資料來源要能測量研究問題中的核心概念。",
+      "教材介紹生物資料庫、健保資料與癌症登記各有優勢；跨庫連結仍需權限、品質及適用性評估。"
+    ],
+    "why": [
+      "處方紀錄不等於基因測量。",
+      "彙總人次不足以研究個人的基因與吸菸。",
+      "正確：先對齊資料內容，再評估能否合法、正確地連結。"
+    ],
+    "hint": "資料名稱不是重點，能否量到想研究的變項才是。",
+    "source": [
+      [
+        1,
+        "11–13"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "不同資料回答不同問題",
+      "items": [
+        "就醫／處方：健保資料",
+        "基因／生活型態：生物資料庫",
+        "癌別／分期：癌症登記"
+      ]
+    },
+    "difficulty": "基礎暖身",
+    "id": "C02"
+  },
+  {
+    "stage": 0,
+    "title": "300 筆就醫紀錄，等於 300 個人嗎？",
+    "body": "資料表共有 300 列，但去識別化個人代碼只有 100 個。你想估計「有就醫者的平均年齡」。",
+    "options": [
+      "先釐清分析單位，避免把多次就醫的人重複加權",
+      "直接將 300 列的年齡取平均，一定是每人的平均",
+      "隨意留下前 100 列即可"
+    ],
+    "answer": 0,
+    "steps": [
+      "一列資料可能代表一次就醫，而不是一個人。",
+      "如果目標是每人的平均年齡，需定義基準日並建立每人一筆的適當資料。"
+    ],
+    "why": [
+      "正確：先確認分母與分析單位。",
+      "頻繁就醫者會被重複計入，改變權重。",
+      "前 100 列不保證是 100 位不同的人。"
+    ],
+    "hint": "先問「一列代表什麼」。",
+    "source": [
+      [
+        1,
+        "14–15、17"
+      ]
+    ],
+    "visual": {
+      "kind": "table",
+      "title": "紀錄數與人數分開看",
+      "heads": [
+        "個人代碼",
+        "就醫日期",
+        "資料列"
+      ],
+      "rows": [
+        [
+          "P01",
+          "9/1、9/8、9/15",
+          "3 列，1 人"
+        ],
+        [
+          "P02",
+          "9/2",
+          "1 列，1 人"
+        ],
+        [
+          "合計",
+          "4 次就醫",
+          "2 人"
+        ]
+      ]
+    },
+    "difficulty": "應用判讀",
+    "id": "C03"
+  },
+  {
+    "stage": 0,
+    "title": "資料串聯後人數突然膨脹？",
+    "body": "A 表每人 2 筆處方，B 表每人 3 筆檢查。只用個人代碼做 SQL 連接，某人產生 6 列。最可能原因是？",
+    "options": [
+      "該病人的疾病風險變成 6 倍",
+      "多對多連接造成紀錄組合，需要檢查鍵值與時間對應",
+      "SAS 自動創造了 5 位新病人"
+    ],
+    "answer": 1,
+    "steps": [
+      "同一鍵值的 2 筆乘上 3 筆，會得到 6 個配對組合。",
+      "應依研究需求彙整、加入合理日期條件或定義事件層級，不能直接把新列數當人數。"
+    ],
+    "why": [
+      "列數不是效應量。",
+      "正確：這是多對多連接的結果。",
+      "新增的是配對列，不是新個人。"
+    ],
+    "hint": "同一代碼兩邊都重複時，想想 2 × 3。",
+    "source": [
+      [
+        1,
+        "14–15"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "連接前先檢查資料粒度",
+      "items": [
+        "處方表：每人 2 列",
+        "檢查表：每人 3 列",
+        "只按 ID 連接：6 列",
+        "檢查日期／彙整規則"
+      ]
+    },
+    "difficulty": "進階推理",
+    "id": "C04"
+  },
+  {
+    "stage": 0,
+    "title": "傾向分數匹配後，等同隨機試驗嗎？",
+    "body": "研究以年齡、性別與共病配對用藥組和未用藥組。哪個結論最合理？",
+    "options": [
+      "所有已知與未知混雜都消失了",
+      "配對後不必再看平衡診斷",
+      "可改善納入模型的基線變項平衡，但仍有未測量混雜與模型限制"
+    ],
+    "answer": 2,
+    "steps": [
+      "傾向分數來自已觀察到的變項。",
+      "匹配後仍需檢查平衡、可比較性與樣本損失，不能保證全部基準線完全一致。"
+    ],
+    "why": [
+      "未測量因素不會憑空被控制。",
+      "平衡診斷是必要的檢查之一。",
+      "正確：匹配有幫助，但不能把觀察研究變成 RCT。"
+    ],
+    "hint": "配對只能利用實際量到的資訊。",
+    "source": [
+      [
+        1,
+        "16"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "匹配的能力與邊界",
+      "items": [
+        "量到的基線變項",
+        "估計傾向分數／匹配",
+        "檢查平衡與重疊",
+        "未測量混雜仍可能存在"
+      ]
+    },
+    "difficulty": "進階推理",
+    "id": "C05"
+  },
+  {
+    "stage": 0,
+    "title": "同一病人每月量血壓，資料獨立嗎？",
+    "body": "100 位病人連續量 6 個月血壓，共 600 筆。若把每筆都當成互不相關的個案，問題在哪裡？",
+    "options": [
+      "忽略同一人的相關性，可能讓不確定性估計不恰當",
+      "只要超過 500 筆就自動獨立",
+      "可以直接宣稱有 600 位病人"
+    ],
+    "answer": 0,
+    "steps": [
+      "同一人的測量常共享健康狀態與生活條件。",
+      "研究可視目標使用混合模型或 GEE 等方法處理相關性；不能只靠列數判斷有效資訊。"
+    ],
+    "why": [
+      "正確：群聚與重複測量影響標準誤等推論。",
+      "獨立性不是樣本數達標後就會出現。",
+      "600 次測量仍來自 100 人。"
+    ],
+    "hint": "比較「100 人各量 6 次」與「600 人各量 1 次」。",
+    "source": [
+      [
+        1,
+        "17"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "重複測量的層級",
+      "items": [
+        "100 位病人",
+        "每人 6 次血壓",
+        "同人測量可能相關",
+        "選擇能處理相關性的模型"
+      ]
+    },
+    "difficulty": "應用判讀",
+    "id": "C06"
+  },
+  {
+    "stage": 0,
+    "title": "KM 曲線與調整後 HR，SAS 工具怎麼選？",
+    "body": "你想先畫未調整存活曲線，再估計控制年齡與共病後的 HR。",
+    "options": [
+      "兩個任務都只能用 PROC FREQ",
+      "曲線可用 PROC LIFETEST；Cox 模型可用 PROC PHREG",
+      "只要用 PROC MEANS 就能得到調整後 HR"
+    ],
+    "answer": 1,
+    "steps": [
+      "LIFETEST 可進行常用的非參數存活分析。",
+      "PHREG 用於 Cox 等存活迴歸分析，納入共變項不等於保證因果解釋。"
+    ],
+    "why": [
+      "FREQ 主要處理次數表，不能替代這些存活模型。",
+      "正確：工具要對應分析目標。",
+      "描述平均數不會直接產生 Cox 的調整後 HR。"
+    ],
+    "hint": "一個著重曲線與組間比較，一個著重迴歸。",
+    "source": [
+      [
+        1,
+        "17"
+      ],
+      [
+        2,
+        "22–24"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "研究目標對應 SAS 程序",
+      "items": [
+        "KM／組間存活比較：LIFETEST",
+        "Cox／共變項調整：PHREG",
+        "解讀前檢查設限與模型假設"
+      ]
+    },
+    "difficulty": "基礎暖身",
+    "id": "C07"
+  },
+  {
+    "stage": 0,
+    "title": "「用了專業軟體，所以結論可信」合理嗎？",
+    "body": "一篇論文寫「使用 SAS 分析」，但未交代納入條件、缺失值或模型假設。",
+    "options": [
+      "足夠，專業軟體會自動修正所有研究設計問題",
+      "只要換成另一個軟體就能解決",
+      "仍需檢查資料定義、設計、假設與可重現性"
+    ],
+    "answer": 2,
+    "steps": [
+      "軟體能執行指定的計算，但不會替研究問題提供正確設計。",
+      "應檢查方法、資料品質及不確定性，而不是把軟體名稱當成證據品質保證。"
+    ],
+    "why": [
+      "軟體不會自動補救不當的比較或錯誤的事件定義。",
+      "換工具不會自動改善原本的研究問題。",
+      "正確：品質來自整個研究流程。"
+    ],
+    "hint": "把軟體想成計算工具，誰決定要算什麼？",
+    "source": [
+      [
+        1,
+        "6、14–19"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "可信的研究需要什麼",
+      "items": [
+        "清楚的問題",
+        "適當的資料與設計",
+        "可檢查的分析",
+        "透明報告限制"
+      ]
+    },
+    "difficulty": "進階推理",
+    "id": "C08"
+  },
+  {
+    "stage": 1,
+    "title": "存活分析的「事件」一定是死亡嗎？",
+    "body": "你想研究患者從復健開始到重返工作的時間。",
+    "options": [
+      "可以使用存活分析，只要明確定義事件與起點",
+      "不行，事件一定得是死亡",
+      "把尚未重返工作者的時間一律設為 0"
+    ],
+    "answer": 0,
+    "steps": [
+      "存活分析研究的是到指定事件的時間。",
+      "重返工作、復發、出院等都可能是事件，事件越早不一定越壞。"
+    ],
+    "why": [
+      "正確：核心是 time-to-event，不是名稱中的「存活」。",
+      "事件可以是有利或不利的結果。",
+      "尚未發生事件者可能是設限，不能任意記 0。"
+    ],
+    "hint": "先把「存活」替換為「尚未發生指定事件」。",
+    "source": [
+      [
+        1,
+        "25"
+      ],
+      [
+        2,
+        "2–5"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "定義事件之後才能讀曲線",
+      "items": [
+        "起點：開始復健",
+        "事件：首次重返工作",
+        "S(t)：到 t 仍未重返工作",
+        "曲線高低須依事件意義解讀"
+      ]
+    },
+    "difficulty": "基礎暖身",
+    "id": "C09"
+  },
+  {
+    "stage": 1,
+    "title": "兩組死亡比例相同，存活經驗就相同？",
+    "body": "A、B 各 20 人都發生 18 次死亡，但 B 組死亡大多較早。",
+    "options": [
+      "相同，18/20 已經包含全部資訊",
+      "不一定，還要考慮發生時間、追蹤長度與設限",
+      "應刪除兩組尚存活的人再比平均"
+    ],
+    "answer": 1,
+    "steps": [
+      "同樣的事件比例可能對應很不同的發生時間。",
+      "存活分析可同時利用時間與事件指標，而不是僅比較截止日比例。"
+    ],
+    "why": [
+      "單一比例沒有包含事件的時間順序。",
+      "正確：事件發生的快慢也有資訊。",
+      "刪除設限者會丟掉已知追蹤資訊，可能產生偏誤。"
+    ],
+    "hint": "同樣都到達終點，花多久仍有差別。",
+    "source": [
+      [
+        2,
+        "6–7"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "事件比例沒有告訴你的事",
+      "items": [
+        "A：18/20，事件較晚",
+        "B：18/20，事件較早",
+        "比例相同 ≠ 時間分布相同"
+      ]
+    },
+    "difficulty": "基礎暖身",
+    "id": "C10"
+  },
+  {
+    "stage": 1,
+    "title": "存活時間的起點可以各自挑選嗎？",
+    "body": "A 組從診斷日開始，B 組從治療結束日開始，直接比較死亡時間。",
+    "options": [
+      "只要都用天數，就能直接比較",
+      "起點越晚會自動使研究更精確",
+      "需先使起點定義與研究問題一致，評估不同時間零點造成的偏誤"
+    ],
+    "answer": 2,
+    "steps": [
+      "起點不同，納入的病程階段與必須先存活的條件也可能不同。",
+      "研究應預先定義一致的時間零點，避免把某段必須存活的時間處理不當。"
+    ],
+    "why": [
+      "時間單位相同不表示起算條件相同。",
+      "較晚開始可能選入已存活一段時間的人。",
+      "正確：時間零點是研究設計的一部分。"
+    ],
+    "hint": "比較的不只是天數，還包括從哪一刻開始算。",
+    "source": [
+      [
+        2,
+        "3、5"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "時間零點決定你比較什麼",
+      "items": [
+        "診斷日",
+        "開始治療日",
+        "治療結束日",
+        "依問題明確定義並一致處理"
+      ]
+    },
+    "difficulty": "進階推理",
+    "id": "C11"
+  },
+  {
+    "stage": 1,
+    "title": "第 8 個月失訪，應該怎麼記錄？",
+    "body": "事件定義是死亡；最後確認此人存活的時間是第 8 個月，其後狀態未知。本題編碼 event=1 為死亡，0 為設限。",
+    "options": [
+      "time=8，event=0",
+      "time=8，event=1",
+      "time=0，event=0"
+    ],
+    "answer": 0,
+    "steps": [
+      "已知這個人至少存活到第 8 個月。",
+      "保留 8 個月的追蹤貢獻，之後不再列入在險集合。"
+    ],
+    "why": [
+      "正確：這是右設限的記錄方式。",
+      "失訪不是已確認死亡。",
+      "這會丟掉前 8 個月已知的追蹤資訊。"
+    ],
+    "hint": "「最後知道的時間」和「事件是否確認」要分開記。",
+    "source": [
+      [
+        2,
+        "8–10"
+      ]
+    ],
+    "visual": {
+      "kind": "timeline",
+      "title": "右設限保留已知追蹤時間",
+      "rows": [
+        [
+          "個案 A",
+          8,
+          0
+        ],
+        [
+          "個案 B",
+          5,
+          1
+        ],
+        [
+          "個案 C",
+          12,
+          0
+        ]
+      ],
+      "caption": "×：事件；＋：右設限。右設限之後的事件時間未知。"
+    },
+    "difficulty": "基礎暖身",
+    "id": "C12"
+  },
+  {
+    "stage": 1,
+    "title": "設限發生時，KM 曲線一定下降嗎？",
+    "body": "某時間點只有一人失訪，沒有事件發生。",
+    "options": [
+      "曲線下降，失訪和事件一樣",
+      "當下不下降，但之後在險人數減少",
+      "曲線上升，因為少了一位高風險者"
+    ],
+    "answer": 1,
+    "steps": [
+      "KM 的下降發生在觀察到事件時。",
+      "設限影響後續的分母，但不直接造成當下的存活率跳動。"
+    ],
+    "why": [
+      "只有事件才造成 KM 的向下階梯。",
+      "正確：保留過去貢獻，停止之後貢獻。",
+      "KM 曲線不會因移除個案而向上跳。"
+    ],
+    "hint": "把「事件數」與「在險人數」分開想。",
+    "source": [
+      [
+        1,
+        "30–34"
+      ],
+      [
+        2,
+        "9–10"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "只有設限、沒有事件的時點",
+      "items": [
+        "設限前：仍在追蹤",
+        "當下事件數 = 0",
+        "S(t) 不下降",
+        "之後的在險人數減少"
+      ]
+    },
+    "difficulty": "應用判讀",
+    "id": "C13"
+  },
+  {
+    "stage": 1,
+    "title": "三種研究停止方式，哪一組配對正確？",
+    "body": "甲：預定追蹤至第 36 個月。乙：觀察到預先指定的事件數後停止。丙：個人於不同時間失訪。",
+    "options": [
+      "甲 Type II；乙 Type I；丙 Type III",
+      "甲 Type III；乙 Type II；丙 Type I",
+      "甲 Type I；乙 Type II；丙屬教材的 Type III／隨機設限情境"
+    ],
+    "answer": 2,
+    "steps": [
+      "教材以固定時間、固定事件數與隨機設限區分三種情境。",
+      "「隨機設限」的名稱不保證失訪與預後獨立，仍需檢查失訪機制。"
+    ],
+    "why": [
+      "固定時間與固定事件數的對應反了。",
+      "甲有事先固定的結束時間。",
+      "正確：依停止追蹤的規則判斷。"
+    ],
+    "hint": "找出事先固定的是「時間」還是「事件數」。",
+    "source": [
+      [
+        2,
+        "11–13"
+      ]
+    ],
+    "visual": {
+      "kind": "table",
+      "title": "教材中的設限情境",
+      "heads": [
+        "類型",
+        "研究停止／設限規則"
+      ],
+      "rows": [
+        [
+          "Type I",
+          "固定追蹤時間"
+        ],
+        [
+          "Type II",
+          "固定事件數"
+        ],
+        [
+          "Type III",
+          "個人設限時間不同"
+        ]
+      ]
+    },
+    "difficulty": "應用判讀",
+    "id": "C14"
+  },
+  {
+    "stage": 1,
+    "title": "病況惡化者較容易失訪，會影響 KM 嗎？",
+    "body": "若病況越差的人越容易停止回診，分析卻把他們當成與留在研究者一樣的設限機制。",
+    "options": [
+      "可能違反非資訊性設限假設，估計可能偏誤",
+      "完全不影響，KM 能處理任何失訪機制",
+      "只要把失訪全改成死亡就正確"
+    ],
+    "answer": 0,
+    "steps": [
+      "常見存活方法需要設限機制與後續事件時間在適當條件下獨立。",
+      "若高風險者較容易失訪，剩下觀察者可能無法代表失訪者的後續經驗。"
+    ],
+    "why": [
+      "正確：應調查失訪原因並進行適當分析或敏感度評估。",
+      "能處理設限，不表示對任何設限原因都穩健。",
+      "失訪後的狀態未知，不能擅自改寫。"
+    ],
+    "hint": "問題不只是失訪多少人，也包括哪些人失訪。",
+    "source": [
+      [
+        2,
+        "8–13"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "資訊性設限的風險",
+      "items": [
+        "病況惡化",
+        "更容易失訪",
+        "後續事件風險也較高",
+        "觀察到的人可能不具代表性"
+      ]
+    },
+    "difficulty": "進階推理",
+    "id": "C15"
+  },
+  {
+    "stage": 1,
+    "title": "研究復發時，復發前死亡怎麼辦？",
+    "body": "你想估計「一年內實際發生復發的機率」，但有些人先死亡而不可能再復發。",
+    "options": [
+      "把死亡全當普通失訪，再用 1−KM 就一定正確",
+      "應辨認死亡為競爭事件，考慮累積發生函數等適當方法",
+      "先死亡者之後仍一定可以觀察到復發"
+    ],
+    "answer": 1,
+    "steps": [
+      "死亡會阻止之後的復發，是競爭事件。",
+      "若目標是現實世界中的復發機率，把競爭事件當普通設限再取 1−KM，可能高估累積發生率。"
+    ],
+    "why": [
+      "這忽略了競爭事件對實際機率的影響。",
+      "正確：先確認估計目標，再選方法。",
+      "題目已指定死亡會阻止後續復發。"
+    ],
+    "hint": "不是所有停止追蹤，都只是「未來結果暫時不知道」。",
+    "source": [
+      [
+        2,
+        "10"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "進階補充：先辨認競爭事件",
+      "items": [
+        "仍無復發",
+        "可能先復發",
+        "也可能先死亡",
+        "估計實際復發機率需納入兩種結局"
+      ]
+    },
+    "difficulty": "進階補充",
+    "supplement": true,
+    "id": "C16"
+  },
+  {
+    "stage": 2,
+    "title": "Life table 與 KM，最大的時間處理差別？",
+    "body": "兩者都可估計存活函數，哪個描述正確？",
+    "options": [
+      "兩者只差名稱，計算完全相同",
+      "KM 只能處理 10 人以下的小樣本",
+      "Life table 常按時間區間彙整；KM 在觀察事件時間更新"
+    ],
+    "answer": 2,
+    "steps": [
+      "生命表常把時間分成固定區間。",
+      "KM 使用個別事件時間；它不限定只能用於小樣本。"
+    ],
+    "why": [
+      "分組區間與個別事件時間會帶來不同處理。",
+      "教材以小樣本示範，不表示存在 10 人上限。",
+      "正確：重點是時間資料如何利用。"
+    ],
+    "hint": "先看資料是「每年一格」還是「每次事件的時間」。",
+    "source": [
+      [
+        1,
+        "26–34"
+      ]
+    ],
+    "visual": {
+      "kind": "table",
+      "title": "兩種估計方式",
+      "heads": [
+        "方法",
+        "更新尺度"
+      ],
+      "rows": [
+        [
+          "Life table",
+          "區間，例如 [0,1)、[1,2) 年"
+        ],
+        [
+          "Kaplan–Meier",
+          "實際觀察到的事件時間"
+        ]
+      ]
+    },
+    "difficulty": "基礎暖身",
+    "id": "C17"
+  },
+  {
+    "stage": 2,
+    "title": "生命表：有效在險人數怎麼算？",
+    "body": "某區間起始 N=200，區間內設限 c=8。使用教材的半區間暴露近似。",
+    "options": [
+      "N*=200−8/2=196",
+      "N*=200−8=192",
+      "N*=200+8=208"
+    ],
+    "answer": 0,
+    "steps": [
+      "生命表近似設限者平均貢獻半個區間。",
+      "因此有效分母 N*=N−c/2=196。這是區間近似，不是 KM 的在險集合算法。"
+    ],
+    "why": [
+      "正確：扣除的是一半設限數。",
+      "這當作所有設限者完全沒貢獻該區間。",
+      "設限不會新增在險人數。"
+    ],
+    "hint": "每位設限者平均只缺少半段觀察時間。",
+    "source": [
+      [
+        1,
+        "27–29"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "生命表分母的近似",
+      "items": [
+        "起始在險：200",
+        "區間設限：8",
+        "平均扣除：8 ÷ 2",
+        "有效在險：196"
+      ]
+    },
+    "difficulty": "計算挑戰",
+    "id": "C18"
+  },
+  {
+    "stage": 2,
+    "title": "生命表：區間存活與累積存活差在哪？",
+    "body": "第一區間存活率 P₁=0.89，第二區間存活率 P₂=0.77。依題目已四捨五入的數值，第二區間末的累積存活率約多少？",
+    "options": [
+      "0.77",
+      "0.89 × 0.77 ≈ 0.685",
+      "0.89 + 0.77 = 1.66"
+    ],
+    "answer": 1,
+    "steps": [
+      "第二區間的 0.77 是已活過第一區間者的條件存活比例。",
+      "要從最初起點累積到第二區間末，需將各段條件存活率相乘。"
+    ],
+    "why": [
+      "這忽略第一區間已發生的事件。",
+      "正確：約 68.5%；直接用未四捨五入數值時可能略有不同。",
+      "機率不能如此累加，結果也超過 1。"
+    ],
+    "hint": "走完兩段都要成功，使用連乘。",
+    "source": [
+      [
+        1,
+        "28–29"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "累積存活率是連乘",
+      "items": [
+        "起點 S₀ = 1",
+        "第一段 × 0.89",
+        "第二段 × 0.77",
+        "S₂ ≈ 0.685"
+      ]
+    },
+    "difficulty": "計算挑戰",
+    "id": "C19"
+  },
+  {
+    "stage": 2,
+    "title": "KM 實算：第 6 個時間單位的在險人數？",
+    "body": "使用教材資料：3、4、5+、6、6、8+、10+、12、15、17。+ 代表設限。第 6 時點事件發生前，有幾人在險？",
+    "options": [
+      "8 人",
+      "5 人",
+      "7 人"
+    ],
+    "answer": 2,
+    "steps": [
+      "原本 10 人，3 與 4 時點各有 1 事件，剩 8 人。",
+      "5 時點另有 1 人設限；6 時點的兩位事件個案在事件發生前仍在分母內，因此 n=7。"
+    ],
+    "why": [
+      "漏掉 5 時點的設限。",
+      "5 是處理完兩個事件後的人數，不是事件前分母。",
+      "正確：10−1−1−1=7。"
+    ],
+    "hint": "分母是在事件發生「前」計算。",
+    "source": [
+      [
+        1,
+        "30–31"
+      ]
+    ],
+    "visual": {
+      "kind": "km",
+      "title": "教材 10 人資料的 KM 階梯",
+      "caption": "依第 1 份教材 p.31 重繪。+ 為設限，事件前的在險集合決定每次下降。"
+    },
+    "difficulty": "計算挑戰",
+    "id": "C20"
+  },
+  {
+    "stage": 2,
+    "title": "KM 實算：第 6 時點後 S(t) 約多少？",
+    "body": "承上題，第 4 時點後 S=0.8，第 6 時點事件前在險 n=7，事件 d=2。",
+    "options": [
+      "0.8 × (1−2/7) ≈ 0.571",
+      "0.8−2/10=0.6",
+      "1−2/7≈0.714"
+    ],
+    "answer": 0,
+    "steps": [
+      "本次條件存活率為 5/7。",
+      "乘上過去累積存活率 0.8，得到 4/7≈0.571。"
+    ],
+    "why": [
+      "正確：KM 使用各事件時點的條件存活連乘。",
+      "一直使用初始分母會忽略設限與先前事件。",
+      "這只有本次條件存活率，少乘過去的 0.8。"
+    ],
+    "hint": "先算這一階，再乘上前一階。",
+    "source": [
+      [
+        1,
+        "30–31"
+      ]
+    ],
+    "visual": {
+      "kind": "km",
+      "title": "從 0.80 下降到約 0.571",
+      "caption": "第 6 時點有 2 事件、7 人在險；0.80 × 5/7 = 0.571。"
+    },
+    "difficulty": "計算挑戰",
+    "id": "C21"
+  },
+  {
+    "stage": 2,
+    "title": "從曲線找中位存活時間",
+    "body": "下圖依教材 10 人資料重繪，S(6)≈0.571，S(12)≈0.381。中位存活時間怎麼讀？",
+    "options": [
+      "6，因為這時發生兩個事件",
+      "12，首次降到 0.5 或以下的事件時間",
+      "將 6 和 12 平均成 9"
+    ],
+    "answer": 1,
+    "steps": [
+      "常用的 KM 中位數定義為估計存活率首次降至 0.5 或以下的時間。",
+      "第 6 時點仍高於 0.5；到 12 時點才跨越。"
+    ],
+    "why": [
+      "事件數多不代表已累積到一半。",
+      "正確：本例為 12 個時間單位。",
+      "階梯曲線不自動用兩時點平均。"
+    ],
+    "hint": "找第一次碰到或跨過 50% 的下降。",
+    "source": [
+      [
+        1,
+        "31–33"
+      ]
+    ],
+    "visual": {
+      "kind": "km",
+      "title": "讀取 50% 水平線的交會",
+      "caption": "教材範例：中位存活時間 = 12 個時間單位。"
+    },
+    "difficulty": "圖表判讀",
+    "promptVisual": true,
+    "id": "C22"
+  },
+  {
+    "stage": 2,
+    "title": "Log-rank 與廣義 Wilcoxon 的權重？",
+    "body": "假設研究預先關注早期存活差異。依教材介紹，哪個說法正確？",
+    "options": [
+      "Log-rank 只看最後一個時間點",
+      "兩種方法都只比較追蹤終點的比例",
+      "廣義 Wilcoxon 以在險人數加權，常更重視早期；log-rank 的事件時點權重為 1"
+    ],
+    "answer": 2,
+    "steps": [
+      "在險人數通常隨追蹤下降，因此 Wilcoxon 的早期權重較大。",
+      "Log-rank 使用各事件時點，不是「只看後期」。選法應依事先的問題與假設，而不是選最小 p 值。"
+    ],
+    "why": [
+      "Log-rank 會累積各事件時點的比較。",
+      "兩者都利用跨時間的事件資訊。",
+      "正確：不同加權對差異型態的敏感度不同。"
+    ],
+    "hint": "找教材中的 wᵢ=1 與 wᵢ=nᵢ。",
+    "source": [
+      [
+        1,
+        "37–43"
+      ],
+      [
+        2,
+        "15–21"
+      ]
+    ],
+    "visual": {
+      "kind": "table",
+      "title": "示意權重：在險人數逐漸減少",
+      "heads": [
+        "時點",
+        "在險 nᵢ",
+        "Log-rank wᵢ",
+        "Wilcoxon wᵢ"
+      ],
+      "rows": [
+        [
+          "早期",
+          "100",
+          "1",
+          "100"
+        ],
+        [
+          "中期",
+          "60",
+          "1",
+          "60"
+        ],
+        [
+          "後期",
+          "20",
+          "1",
+          "20"
+        ]
+      ]
+    },
+    "difficulty": "進階推理",
+    "id": "C23"
+  },
+  {
+    "stage": 2,
+    "title": "兩條曲線交叉，可以只挑最小的 p 值？",
+    "body": "探索時發現早期 A 較高、後期 B 較高。你試了很多檢定，想只報最小 p 值。",
+    "options": [
+      "不妥；應說明時間變動差異，依事先方案與適當方法評估",
+      "可以，最小的 p 值最接近真相",
+      "曲線交叉表示兩組各時點完全一樣"
+    ],
+    "answer": 0,
+    "steps": [
+      "交叉時，早晚差異可能抵銷，單一摘要容易掩蓋型態。",
+      "事後挑檢定會增加誤導風險；可依目標評估時間區段、限制平均存活時間等適當摘要。"
+    ],
+    "why": [
+      "正確：先問想比較什麼，再考慮方法。",
+      "多次嘗試後挑最小值並非預先指定的單一檢定。",
+      "交叉恰好可能顯示效果方向隨時間改變。"
+    ],
+    "hint": "一個全程平均數字，可能遮住早晚相反的差異。",
+    "source": [
+      [
+        1,
+        "42"
+      ],
+      [
+        2,
+        "20–21"
+      ]
+    ],
+    "visual": {
+      "kind": "cross",
+      "title": "早期與後期，曲線順序相反",
+      "caption": "教學示意，曲線非真實患者資料。交叉需進一步檢查，不等同直接證明違反模型。"
+    },
+    "difficulty": "進階推理",
+    "promptVisual": true,
+    "id": "C24"
+  },
+  {
+    "stage": 3,
+    "title": "Hazard 是累積機率嗎？",
+    "body": "某一時點 h(t)=1.2／年。有人說大於 1，所以計算一定錯。",
+    "options": [
+      "對，hazard 必須介於 0 和 1",
+      "不對，hazard 是條件瞬時發生速率，有時間單位，可大於 1",
+      "代表一年內一定有 120% 的人死亡"
+    ],
+    "answer": 1,
+    "steps": [
+      "Hazard 以仍未發生事件者為條件，描述極短時間的事件速率。",
+      "它有每單位時間的量綱，不能直接當作一年事件機率。"
+    ],
+    "why": [
+      "這是機率的範圍，不是 hazard 的範圍。",
+      "正確：速率與累積機率的尺度不同。",
+      "機率不可能為 120%，也不能直接把 hazard 當比例。"
+    ],
+    "hint": "注意「／年」這個單位。",
+    "source": [
+      [
+        1,
+        "44–45"
+      ],
+      [
+        2,
+        "26–29"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "Hazard 與累積機率",
+      "items": [
+        "Hazard：當下速率，條件於仍在險",
+        "單位：1／時間，可大於 1",
+        "累積機率：一段期間內發生比例",
+        "範圍：0 到 1"
+      ]
+    },
+    "difficulty": "基礎暖身",
+    "id": "C25"
+  },
+  {
+    "stage": 3,
+    "title": "Cox 為什麼叫半參數模型？",
+    "body": "模型寫成 h(t|X)=h₀(t) exp(βX)。哪個描述最準確？",
+    "options": [
+      "因為一半資料有缺失",
+      "基準 hazard 必須是常態分布",
+      "不預設 h₀(t) 的特定分布形狀，但以有限個 β 描述共變項效果"
+    ],
+    "answer": 2,
+    "steps": [
+      "基準 hazard 不指定為某一個參數分布。",
+      "共變項透過 exp(βX) 進入模型；這份彈性不代表免除比例風險等假設。"
+    ],
+    "why": [
+      "「半參數」不是缺失資料比例。",
+      "常態並不是 Cox 的基準 hazard 必要假設。",
+      "正確：兩部分的建模方式不同。"
+    ],
+    "hint": "將公式拆成基準函數與共變項乘數。",
+    "source": [
+      [
+        1,
+        "48、52–53"
+      ],
+      [
+        2,
+        "24–25、35"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "Cox 模型的兩個部分",
+      "items": [
+        "h(t|X) = h₀(t) × exp(βX)",
+        "h₀(t)：未指定特定形狀",
+        "exp(βX)：共變項乘數",
+        "仍須檢查模型假設"
+      ]
+    },
+    "difficulty": "基礎暖身",
+    "id": "C26"
+  },
+  {
+    "stage": 3,
+    "title": "β=0.693，HR 是多少？",
+    "body": "二元暴露 X=1 相對 X=0；其他共變項相同。已知 exp(0.693)≈2。",
+    "options": [
+      "HR≈2，代表當下事件速率約為參考組的兩倍",
+      "HR=0.693，因為係數就是 HR",
+      "存活時間固定縮短一半"
+    ],
+    "answer": 0,
+    "steps": [
+      "在標準 Cox 模型，X 增加 1 單位的 HR 為 exp(β)。",
+      "所以 HR≈2；它不是固定期間風險比，也不是壽命比。"
+    ],
+    "why": [
+      "正確：先將係數取指數。",
+      "β 位於 log-hazard 尺度。",
+      "瞬時速率比不能直接換成每人的壽命比。"
+    ],
+    "hint": "先用題目給的指數運算，不必背計算器操作。",
+    "source": [
+      [
+        1,
+        "48–53"
+      ],
+      [
+        2,
+        "24、34–37"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "從係數到 HR",
+      "items": [
+        "β = 0.693",
+        "X 差距 = 1",
+        "HR = exp(β × 1)",
+        "HR ≈ 2"
+      ]
+    },
+    "difficulty": "計算挑戰",
+    "id": "C27"
+  },
+  {
+    "stage": 3,
+    "title": "年齡每年 HR=0.93，相差 10 歲呢？",
+    "body": "假設年齡對 log-hazard 為線性、PH 成立且其他條件相同，0.93¹⁰≈0.484。",
+    "options": [
+      "HR=0.93−0.70=0.23",
+      "HR≈0.484，不能把每年 7% 直接加十次",
+      "HR 永遠是 0.93，不管年齡差距"
+    ],
+    "answer": 1,
+    "steps": [
+      "每增加一年，hazard 乘以 0.93。",
+      "十年差距需連乘 10 次，或 exp(10β)。此解讀依賴年齡效果的模型形式。"
+    ],
+    "why": [
+      "百分比的乘法效果不能直接線性相減。",
+      "正確：約低 51.6% 的瞬時速率，而非累積死亡機率。",
+      "0.93 指一歲的差距。"
+    ],
+    "hint": "每一步是乘上 0.93。",
+    "source": [
+      [
+        1,
+        "56"
+      ],
+      [
+        2,
+        "39"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "連續變項的單位很重要",
+      "items": [
+        "相差 1 歲：0.93",
+        "相差 10 歲：0.93¹⁰",
+        "約 0.484",
+        "須假設 log-hazard 線性"
+      ]
+    },
+    "difficulty": "計算挑戰",
+    "id": "C28"
+  },
+  {
+    "stage": 3,
+    "title": "HR=1.54，95% CI 0.92–2.58，怎麼寫？",
+    "body": "這是某組相對參考組的調整後 HR（教學數值）。",
+    "options": [
+      "已證明完全沒有效果",
+      "已確定每個人的死亡機率增加 54%",
+      "點估計較高，但 CI 包含 1；仍有不確定性，不能宣稱已證實增加或完全無差異"
+    ],
+    "answer": 2,
+    "steps": [
+      "點估計與區間要一起看。",
+      "CI 包含 1 表示資料仍相容於無差異等可能值；不是「證明沒有效果」。"
+    ],
+    "why": [
+      "未能排除無差異，不等於證明相同。",
+      "HR 是條件瞬時速率比，且本例估計有不確定性。",
+      "正確：保留方向與不確定性。"
+    ],
+    "hint": "無差異值是 1，不是 0。",
+    "source": [
+      [
+        1,
+        "55–56"
+      ],
+      [
+        2,
+        "38–39"
+      ],
+      [
+        3,
+        "39–40"
+      ]
+    ],
+    "visual": {
+      "kind": "hr",
+      "title": "點估計較高，區間仍跨 1",
+      "caption": "教學數值：HR 1.54 [0.92–2.58]；虛線標示無差異值。"
+    },
+    "difficulty": "圖表判讀",
+    "promptVisual": true,
+    "id": "C29"
+  },
+  {
+    "stage": 3,
+    "title": "比例風險，表示兩組 hazard 都不變？",
+    "body": "若 A 組 hazard 從 0.1 升到 0.2，B 組從 0.2 升到 0.4，相同時點 B/A 一直是 2。",
+    "options": [
+      "可以符合 PH；需要固定的是 hazard 比值，不是各組 hazard 本身",
+      "不符合，PH 規定每組 hazard 必須水平",
+      "只要兩條存活曲線不交叉，就已證明 PH"
+    ],
+    "answer": 0,
+    "steps": [
+      "PH 要求指定共變項比較的 hazard 比值隨時間固定。",
+      "各組 hazard 都可變動；不交叉也不足以證明假設成立，還需診斷。"
+    ],
+    "why": [
+      "正確：兩者同步倍增仍可維持固定比值。",
+      "固定 hazard 是更特殊的情況。",
+      "視覺檢查只是線索，不是充分證明。"
+    ],
+    "hint": "「比例固定」和「數值固定」要區分。",
+    "source": [
+      [
+        1,
+        "49–52"
+      ],
+      [
+        2,
+        "32–35"
+      ]
+    ],
+    "visual": {
+      "kind": "table",
+      "title": "各組 hazard 改變，比值仍相同",
+      "heads": [
+        "時點",
+        "A hazard",
+        "B hazard",
+        "B/A"
+      ],
+      "rows": [
+        [
+          "早期",
+          "0.10",
+          "0.20",
+          "2"
+        ],
+        [
+          "後期",
+          "0.20",
+          "0.40",
+          "2"
+        ]
+      ]
+    },
+    "difficulty": "進階推理",
+    "id": "C30"
+  },
+  {
+    "stage": 3,
+    "title": "把年齡與共病放入 Cox，因果就確定了？",
+    "body": "觀察研究調整年齡與共病後，治療 HR=0.70。",
+    "options": [
+      "是，調整後 HR 必然是因果效果",
+      "仍需考慮未測量混雜、選樣、測量誤差與模型假設",
+      "只要 HR 小於 1，就不需要 CI"
+    ],
+    "answer": 1,
+    "steps": [
+      "調整只針對納入且適當測量、建模的資訊。",
+      "因果主張還依賴設計與額外假設，不能只由一個調整後 HR 決定。"
+    ],
+    "why": [
+      "模型調整不等於隨機分派。",
+      "正確：估計關聯與辨識因果是不同層次。",
+      "點估計仍需呈現不確定性。"
+    ],
+    "hint": "想想模型中沒有記錄的疾病嚴重度。",
+    "source": [
+      [
+        1,
+        "16–17"
+      ],
+      [
+        2,
+        "23–25"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "調整後關聯的解讀範圍",
+      "items": [
+        "年齡／共病已納入",
+        "未測量因素可能仍存在",
+        "檢查設計、資料與模型",
+        "謹慎界定因果主張"
+      ]
+    },
+    "difficulty": "進階推理",
+    "id": "C31"
+  },
+  {
+    "stage": 3,
+    "title": "為什麼不直接把追蹤時間做一般線性迴歸？",
+    "body": "部分病人只知道追蹤 12 個月仍存活，真實死亡時間未知。",
+    "options": [
+      "把 12 個月當死亡時間即可",
+      "刪掉尚存活的人就沒有問題",
+      "一般線性迴歸不會自動處理右設限；可依目標使用適當存活模型"
+    ],
+    "answer": 2,
+    "steps": [
+      "12 是最後已知觀察時間，而不是已知死亡時間。",
+      "若直接當完整結果或刪掉設限者，會改變資料含義並可能產生偏誤。"
+    ],
+    "why": [
+      "這會把尚存活誤編成死亡。",
+      "刪除會丟掉部分但有用的資訊。",
+      "正確：模型必須符合事件與設限的資料結構。"
+    ],
+    "hint": "數字看似完整，不代表事件時間真的已知。",
+    "source": [
+      [
+        2,
+        "4、8–10、23"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "完整事件時間與設限時間不同",
+      "items": [
+        "死亡於 12 月：T = 12",
+        "12 月仍存活：T > 12",
+        "兩筆資訊不能當成相同",
+        "依研究目標選存活方法"
+      ]
+    },
+    "difficulty": "應用判讀",
+    "id": "C32"
+  },
+  {
+    "stage": 4,
+    "title": "醫療費用右偏，平均數與中位數怎麼看？",
+    "body": "五人的費用為 1、2、3、4、20（千元）。",
+    "options": [
+      "平均數 6、中位數 3；極端高值拉高平均數",
+      "平均數 3、中位數 6",
+      "平均數與中位數必定相同"
+    ],
+    "answer": 0,
+    "steps": [
+      "平均數=(1+2+3+4+20)/5=6。",
+      "排序後中間值是 3。偏態資料常同時呈現中位數與四分位距，並依問題決定是否也報平均數。"
+    ],
+    "why": [
+      "正確：兩個指標回答不同的中心概念。",
+      "兩者對調了。",
+      "只有某些分布或特定資料才會相同。"
+    ],
+    "hint": "平均使用全部數值，中位數找中間位置。",
+    "source": [
+      [
+        3,
+        "19–25"
+      ]
+    ],
+    "visual": {
+      "kind": "dots",
+      "title": "一個高值，讓平均數向右移",
+      "values": [
+        1,
+        2,
+        3,
+        4,
+        20
+      ],
+      "mean": 6,
+      "median": 3,
+      "caption": "示例單位：千元；圓點代表一位個案。"
+    },
+    "difficulty": "計算挑戰",
+    "id": "C33"
+  },
+  {
+    "stage": 4,
+    "title": "平均數相同，資料就一樣集中？",
+    "body": "A：4、5、6；B：0、5、10。兩組平均都為 5。",
+    "options": [
+      "兩組 SD 一樣，因為平均相同",
+      "B 的樣本 SD 較大；A 的 SD=1，B 的 SD=5",
+      "A 比 B 更分散"
+    ],
+    "answer": 1,
+    "steps": [
+      "樣本 SD 使用平方差總和除以 n−1，再開根號。",
+      "A：√[(1+0+1)/2]=1；B：√[(25+0+25)/2]=5。"
+    ],
+    "why": [
+      "中心相同不表示離中心的距離相同。",
+      "正確：B 的數值離平均更遠。",
+      "看極端值到 5 的距離即可辨認。"
+    ],
+    "hint": "比較每個值到 5 的距離。",
+    "source": [
+      [
+        3,
+        "28–33"
+      ]
+    ],
+    "visual": {
+      "kind": "spread",
+      "title": "同一個平均，不同的分散",
+      "caption": "A 與 B 平均皆為 5；B 的樣本 SD 更大。"
+    },
+    "difficulty": "計算挑戰",
+    "promptVisual": true,
+    "id": "C34"
+  },
+  {
+    "stage": 4,
+    "title": "IQR 與全距，各看哪一段？",
+    "body": "排序資料：1、2、3、4、5、6、7、20。本題採「上下半部各取中位數」定義四分位數。",
+    "options": [
+      "IQR=20−1=19",
+      "IQR=20−4.5=15.5",
+      "Q1=2.5、Q3=6.5，IQR=4；全距=19"
+    ],
+    "answer": 2,
+    "steps": [
+      "下半部 1、2、3、4 的中位數為 2.5；上半部為 6.5。",
+      "IQR=Q3−Q1=4；全距=max−min=19。軟體四分位數算法可能不同，報告時要確認定義。"
+    ],
+    "why": [
+      "19 是全距，包含兩端。",
+      "IQR 不以最大值減總體中位數計算。",
+      "正確：IQR 描述中央一半資料的範圍。"
+    ],
+    "hint": "先切成上下半部，再各找中間。",
+    "source": [
+      [
+        3,
+        "26–27"
+      ]
+    ],
+    "visual": {
+      "kind": "box",
+      "title": "中央一半的範圍與全部範圍",
+      "caption": "依本題四分位數規則繪製；端點畫 min/max，不採 1.5×IQR 鬚線規則。"
+    },
+    "difficulty": "計算挑戰",
+    "id": "C35"
+  },
+  {
+    "stage": 4,
+    "title": "直方圖有兩座山，是兩種疾病嗎？",
+    "body": "某健康指標的直方圖出現雙峰。下列哪項最合理？",
+    "options": [
+      "雙峰描述分布形狀；可能有混合族群或其他原因，應進一步查資料",
+      "雙峰直接證明有兩種疾病",
+      "雙峰表示每筆資料都輸入錯誤"
+    ],
+    "answer": 0,
+    "steps": [
+      "峰是數值較常出現的位置。",
+      "雙峰可能與亞群、測量或分箱設定有關；單靠形狀不能確定醫學原因。"
+    ],
+    "why": [
+      "正確：圖形提供線索，而不是原因證明。",
+      "從分布直接推斷疾病種類是過度解讀。",
+      "有雙峰不代表全部資料錯誤。"
+    ],
+    "hint": "圖形可以提示你追查分組變項，但不能代替診斷。",
+    "source": [
+      [
+        3,
+        "17–23"
+      ]
+    ],
+    "visual": {
+      "kind": "hist",
+      "title": "雙峰直方圖：先找原因，別急著下結論",
+      "caption": "虛構資料的等寬分箱示意；橫軸為健康指標，縱軸為人數。"
+    },
+    "difficulty": "圖表判讀",
+    "promptVisual": true,
+    "id": "C36"
+  },
+  {
+    "stage": 4,
+    "title": "Z 分數 2，表示什麼？",
+    "body": "某測量值 140，參考平均 120、SD=10。Z=(X−平均)/SD。",
+    "options": [
+      "低於平均 2 個 SD",
+      "高於平均 2 個 SD；但百分位解讀需分布假設",
+      "代表 140 有 2% 的機率發生"
+    ],
+    "answer": 1,
+    "steps": [
+      "Z=(140−120)/10=2。",
+      "標準化描述相對位置；只做 Z 轉換不會把任意分布變成常態。"
+    ],
+    "why": [
+      "正值代表高於平均。",
+      "正確：位置可以計算，常態尾端機率則另需假設。",
+      "Z 並不是某個值的機率。"
+    ],
+    "hint": "差 20，除以一個 SD 的大小 10。",
+    "source": [
+      [
+        3,
+        "35–37"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "標準化的三步",
+      "items": [
+        "觀察值 140",
+        "減掉平均 120：差 20",
+        "除以 SD 10",
+        "Z = 2"
+      ]
+    },
+    "difficulty": "計算挑戰",
+    "id": "C37"
+  },
+  {
+    "stage": 4,
+    "title": "PROC MEANS 裡，CLASS 與 VAR 怎麼分工？",
+    "body": "想依性別分組，列出 BMI 的 N、平均與 SD。哪組設定符合目標？",
+    "options": [
+      "CLASS bmi；VAR sex；",
+      "只寫 TABLES sex*bmi；",
+      "PROC MEANS 中使用 CLASS sex；VAR bmi；"
+    ],
+    "answer": 2,
+    "steps": [
+      "CLASS 指定分組變項。",
+      "VAR 指定要彙整的數值變項。本例以性別分組並計算 BMI 的描述統計。"
+    ],
+    "why": [
+      "把分組和被彙整的變項交換了。",
+      "TABLES 是 FREQ 的常見語法，並非這個任務的 MEANS 設定。",
+      "正確：CLASS 分組，VAR 指定要分析的數值欄位。"
+    ],
+    "hint": "先問「按誰分組」，再問「算誰的平均」。",
+    "source": [
+      [
+        3,
+        "13–14、38"
+      ]
+    ],
+    "visual": {
+      "kind": "table",
+      "title": "讀懂這段 SAS 指令",
+      "heads": [
+        "語句",
+        "本例功能"
+      ],
+      "rows": [
+        [
+          "proc means data=health;",
+          "選擇資料與描述統計程序"
+        ],
+        [
+          "class sex;",
+          "按性別分組"
+        ],
+        [
+          "var bmi; run;",
+          "彙整 BMI"
+        ]
+      ]
+    },
+    "difficulty": "應用判讀",
+    "id": "C38"
+  },
+  {
+    "stage": 4,
+    "title": "性別與疾病狀態的次數表，選哪個程序？",
+    "body": "你要呈現各性別中有病／無病的人數與百分比。",
+    "options": [
+      "PROC FREQ，使用 TABLES sex*disease",
+      "PROC PHREG，不需時間欄位",
+      "只計算 disease 的平均即可取代整張交叉表"
+    ],
+    "answer": 0,
+    "steps": [
+      "FREQ 可建立類別變項的單向或交叉次數表。",
+      "檢視百分比時要確認分母：列百分比、欄百分比或總百分比代表不同問題。"
+    ],
+    "why": [
+      "正確：兩個類別變項適合交叉表。",
+      "PHREG 不是這個描述性次數表的工具。",
+      "二元平均有時等於比例，但不能取代各分組完整交叉表。"
+    ],
+    "hint": "兩個類別變項，先列人數與分母。",
+    "source": [
+      [
+        3,
+        "15、38"
+      ]
+    ],
+    "visual": {
+      "kind": "table",
+      "title": "交叉表先認清分母（虛構）",
+      "heads": [
+        "分組",
+        "有病",
+        "無病",
+        "合計"
+      ],
+      "rows": [
+        [
+          "A",
+          "20",
+          "80",
+          "100"
+        ],
+        [
+          "B",
+          "30",
+          "70",
+          "100"
+        ],
+        [
+          "合計",
+          "50",
+          "150",
+          "200"
+        ]
+      ]
+    },
+    "difficulty": "基礎暖身",
+    "id": "C39"
+  },
+  {
+    "stage": 4,
+    "title": "懷疑資料偏態或有極端值，下一步？",
+    "body": "平均與 SD 已算好，但你想進一步檢查直方圖、Q–Q 圖與分位數。",
+    "options": [
+      "只要 N 很大就不用看圖",
+      "可用 PROC UNIVARIATE 等工具，結合圖形、極端值與分布檢查",
+      "只要常態檢定 p 大於 0.05，就證明資料完全常態"
+    ],
+    "answer": 1,
+    "steps": [
+      "UNIVARIATE 提供較詳細的單變項分布診斷。",
+      "檢定、圖形與資料背景應一起看；沒拒絕常態假設不等於證明完全常態，樣本量也影響檢定敏感度。"
+    ],
+    "why": [
+      "大樣本仍可能存在輸入錯誤與不對稱分布。",
+      "正確：描述統計後還要檢查數值結構。",
+      "未拒絕假設不是完全相符的證明。"
+    ],
+    "hint": "把一個 p 值與多種資料線索合在一起。",
+    "source": [
+      [
+        3,
+        "16、38"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "分布診斷的線索",
+      "items": [
+        "直方圖：形狀與多峰",
+        "Q–Q 圖：與理論分布比較",
+        "分位數／極端值：檢查尾端",
+        "結合樣本量與資料背景"
+      ]
+    },
+    "difficulty": "進階推理",
+    "id": "C40"
+  },
+  {
+    "stage": 5,
+    "title": "母體參數與樣本統計量怎麼分？",
+    "body": "目標是全校研究生的平均睡眠時間，抽 100 人得到平均 6.4 小時。",
+    "options": [
+      "6.4 一定就是真正的全校平均",
+      "全校平均和樣本平均都是固定已知數",
+      "全校平均是未知參數 μ；6.4 是這次樣本平均的估計值"
+    ],
+    "answer": 2,
+    "steps": [
+      "母體參數描述目標族群。",
+      "樣本統計量由抽到的資料計算，換一批樣本可能不同；這種變化形成抽樣分布。"
+    ],
+    "why": [
+      "抽樣估計通常有不確定性。",
+      "全校平均未知，樣本統計量在重抽樣時會變動。",
+      "正確：區分目標與用來推論的觀察結果。"
+    ],
+    "hint": "誰是想知道的「全部」，誰是實際量到的「部分」？",
+    "source": [
+      [
+        3,
+        "4–8"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "從樣本推論母體",
+      "items": [
+        "目標：全校研究生",
+        "抽樣：100 人",
+        "樣本平均：6.4 小時",
+        "推論未知母體平均 μ"
+      ]
+    },
+    "difficulty": "基礎暖身",
+    "id": "C41"
+  },
+  {
+    "stage": 5,
+    "title": "Estimator 與 Estimate，差在哪？",
+    "body": "研究者用「把數值加總再除以 n」的方法，算出平均年齡 42 歲。",
+    "options": [
+      "計算規則是估計量；42 歲是這份資料的估計值",
+      "42 歲是估計量，計算規則是估計值",
+      "兩個詞都只代表母體真值"
+    ],
+    "answer": 0,
+    "steps": [
+      "估計量是以樣本為輸入的規則或統計量。",
+      "估計值是把特定樣本代入後得到的數字。"
+    ],
+    "why": [
+      "正確：先有方法，再得到這一次的結果。",
+      "規則與數值的位置反了。",
+      "估計可能接近真值，但不等於已知道真值。"
+    ],
+    "hint": "配方和這次做出的成品不同。",
+    "source": [
+      [
+        3,
+        "8–10"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "從估計規則到數值",
+      "items": [
+        "規則：x̄ = Σx / n",
+        "輸入：本次樣本",
+        "輸出：42 歲",
+        "估計量 → 估計值"
+      ]
+    },
+    "difficulty": "基礎暖身",
+    "id": "C42"
+  },
+  {
+    "stage": 5,
+    "title": "不偏估計量，每次都等於真值？",
+    "body": "某估計量的不偏性已在假設下成立。研究者說：「所以任何一次抽樣都會算出真值。」",
+    "options": [
+      "正確，不偏就是沒有抽樣變異",
+      "不正確，不偏是期望值等於真值，單次仍可能偏離",
+      "只要一次偏離真值，這個估計量就不一致"
+    ],
+    "answer": 1,
+    "steps": [
+      "不偏性描述重複抽樣下估計量的期望。",
+      "一致性關注樣本數增大時的收斂；效率比較變異，三者並非同一概念。"
+    ],
+    "why": [
+      "不偏不會消除單次的隨機變動。",
+      "正確：長期平均對準，不代表每次都命中。",
+      "單次誤差不能直接否定大樣本下的一致性。"
+    ],
+    "hint": "把很多次結果的平均，和一次結果分開想。",
+    "source": [
+      [
+        3,
+        "8、11"
+      ]
+    ],
+    "visual": {
+      "kind": "estimator",
+      "title": "不偏：重複抽樣的中心對準真值",
+      "caption": "示意點並非真實資料；單次估計可高於或低於真值。"
+    },
+    "difficulty": "進階推理",
+    "id": "C43"
+  },
+  {
+    "stage": 5,
+    "title": "MLE 的核心想法是什麼？",
+    "body": "比較兩種估計方法：最大概似估計（MLE）與動差法（MME）。",
+    "options": [
+      "MLE 挑最小的 p 值；MME 挑最大的樣本",
+      "MLE 不需要模型，永遠保證不偏",
+      "MLE 在模型下尋找使已觀察資料概似最大的參數；MME 常令樣本動差對應理論動差"
+    ],
+    "answer": 2,
+    "steps": [
+      "兩者都是求估計量的方法，需依模型與資料結構使用。",
+      "MLE 最大化的是給定資料下、隨參數變動的概似，不是在沒有先驗設定時直接得到參數的機率。"
+    ],
+    "why": [
+      "估計方法不是挑 p 值或樣本數。",
+      "MLE 依賴模型，有限樣本下不一定不偏。",
+      "正確：一個看概似，另一個配對動差。"
+    ],
+    "hint": "想像比較多個候選參數，哪個最能支持已觀察資料？",
+    "source": [
+      [
+        3,
+        "12"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "估計方法的兩條路",
+      "items": [
+        "MLE：指定模型 → 最大化概似",
+        "MME：樣本動差 → 對應理論動差",
+        "都是求參數估計的規則",
+        "仍需檢查假設與估計性質"
+      ]
+    },
+    "difficulty": "進階補充",
+    "supplement": true,
+    "id": "C44"
+  },
+  {
+    "stage": 5,
+    "title": "95% CI 是 95% 個人都在區間內？",
+    "body": "研究報告「平均睡眠時間的 95% CI 為 6.1–6.7 小時」。哪個解讀合理？",
+    "options": [
+      "在假設下反覆使用此方法，約 95% 的區間會涵蓋母體平均；不是個人的分布範圍",
+      "95% 研究生每天都睡 6.1–6.7 小時",
+      "有了 CI 就不會有選樣偏誤"
+    ],
+    "answer": 0,
+    "steps": [
+      "CI 描述參數估計的不確定性。",
+      "SD 描述個人數值分散；平均數的 SE 描述其抽樣變異。在獨立同分布等條件下，SE 通常以 SD/√n 估計。"
+    ],
+    "why": [
+      "正確：95% 是方法的長期涵蓋率。",
+      "個人範圍與平均數 CI 是不同問題。",
+      "CI 不會自動修正資料來源的偏誤。"
+    ],
+    "hint": "這個區間估的是「平均」，不是「每個人」。",
+    "source": [
+      [
+        3,
+        "30–33、39–40"
+      ]
+    ],
+    "visual": {
+      "kind": "ci",
+      "title": "重複抽樣，區間會變，真值固定",
+      "caption": "概念示意，非實際模擬比例；95% 是長期涵蓋率，不要求每 20 次恰好 19 次命中。"
+    },
+    "difficulty": "圖表判讀",
+    "promptVisual": true,
+    "id": "C45"
+  },
+  {
+    "stage": 5,
+    "title": "雙尾 5% 檢定，兩側各留多少？",
+    "body": "本題使用標準常態分布作為檢定統計量的參考分布。雙尾 α=0.05。",
+    "options": [
+      "左右各留 5%，總共 10%",
+      "左右各留 2.5%，臨界值約 −1.96、+1.96",
+      "看完資料後再選單尾或雙尾，才能提升效力"
+    ],
+    "answer": 1,
+    "steps": [
+      "雙尾檢定把總 α 分給兩端。",
+      "1.96 對應標準常態近似；並不是任何統計量都可直接套用，也不表示任意原始資料標準化後都常態。"
+    ],
+    "why": [
+      "這會使總尾端機率變為 0.10。",
+      "正確：0.025+0.025=0.05。",
+      "方向與檢定應依事先的研究問題指定。"
+    ],
+    "hint": "把 5% 平分到兩個方向。",
+    "source": [
+      [
+        3,
+        "34–37、41–42"
+      ]
+    ],
+    "visual": {
+      "kind": "normal",
+      "title": "標準常態參考分布的雙尾區域",
+      "caption": "雙尾 α=0.05：左 2.5%、右 2.5%；中央約 95%。"
+    },
+    "difficulty": "計算挑戰",
+    "id": "C46"
+  },
+  {
+    "stage": 5,
+    "title": "第一類錯誤、第二類錯誤與檢定力",
+    "body": "在事先指定的檢定中：H₀ 真的成立卻被拒絕，是哪一種錯誤？若某指定效果下 β=0.20，power 為多少？",
+    "options": [
+      "第二類錯誤；power=0.20",
+      "第一類錯誤；power=1.20",
+      "第一類錯誤；power=1−β=0.80"
+    ],
+    "answer": 2,
+    "steps": [
+      "第一類錯誤是 H₀ 為真卻拒絕，機率由 α 控制。",
+      "第二類錯誤是指定替代情境下未拒絕假的 H₀；檢定力為 1−β，且依效果、樣本量等條件而變。"
+    ],
+    "why": [
+      "把兩類錯誤混淆，且 β 不是 power。",
+      "機率不可能為 1.20。",
+      "正確：漏掉效果的機率 20%，偵測到的機率 80%。"
+    ],
+    "hint": "用「誤報」和「漏報」幫助區分。",
+    "source": [
+      [
+        3,
+        "41–43"
+      ]
+    ],
+    "visual": {
+      "kind": "errors",
+      "title": "真實情況 × 檢定決策",
+      "caption": "「未拒絕 H₀」不等於已經證明 H₀ 正確。"
+    },
+    "difficulty": "進階推理",
+    "id": "C47"
+  },
+  {
+    "stage": 5,
+    "title": "Lab Meeting：這個 p 值，該怎麼報告？",
+    "body": "虛構 RCT：新教材使平均測驗分數比對照組高 0.4 分（滿分 100），95% CI 0.2–0.6，p 小於 0.001。評分成本每人增加許多。哪個報告最完整？",
+    "options": [
+      "p 很小，所以每個人都至少提高 10 分",
+      "資料不太相容於無差異假設，但改善幅度小；應同時評估實際意義、成本與研究品質",
+      "p 小於 0.001 表示虛無假設為真的機率小於 0.1%"
+    ],
+    "answer": 1,
+    "steps": [
+      "p 值在指定虛無假設及其他檢定假設下，衡量目前或更極端資料的機率。",
+      "統計顯著不等於效果重要。完整報告應一起呈現設計、效應量、CI 與限制。"
+    ],
+    "why": [
+      "沒有支持「每個人」或「10 分」的資訊。",
+      "正確：同時討論證據、不確定性與決策價值。",
+      "p 值不是 H₀ 為真的機率。"
+    ],
+    "hint": "把「差異能否辨識」和「差異值不值得」分開。",
+    "source": [
+      [
+        3,
+        "39–44"
+      ]
+    ],
+    "visual": {
+      "kind": "flow",
+      "title": "從數字走向研究判讀",
+      "items": [
+        "設計：隨機對照試驗",
+        "效應量：平均高 0.4 分",
+        "95% CI：0.2–0.6",
+        "實際意義、成本與限制"
+      ]
+    },
+    "difficulty": "綜合挑戰",
+    "id": "C48"
+  }
+];
+function chart(type){if(type==='forest')return `<div class="chart"><svg viewBox="0 0 540 225" role="img" aria-label="森林圖：研究 A，RR 0.60，95% CI 0.40 到 0.90；研究 B，RR 0.90，95% CI 0.60 到 1.35。虛線為 RR 等於 1。"><text x="15" y="24">風險比 RR · 點估計與 95% CI</text><path d="M340 42V170" stroke="#f4d88d" stroke-dasharray="5 5"/><text x="320" y="196">1.0</text><text x="190" y="196">0.5</text><text x="410" y="196">1.5</text><path d="M130 172H495" stroke="#66838c"/><text x="16" y="79">研究 A</text><text x="16" y="132">研究 B</text><path d="M157 74H319M157 68V80M319 68V80M238 127H400M238 121V133M400 121V133" stroke="#a5efcc" stroke-width="3"/><rect x="231" y="67" width="14" height="14" fill="#a5efcc"/><rect x="312" y="120" width="14" height="14" fill="#a5efcc"/><text x="165" y="219">較低風險 ←</text><text x="374" y="219">→ 較高風險</text></svg><div class="small">A：0.60 [0.40–0.90]　B：0.90 [0.60–1.35] · 對數刻度示意</div></div>`;
+return `<div class="chart"><svg viewBox="0 0 540 265" role="img" aria-label="Kaplan–Meier 存活曲線示意：6 個月時 A 組存活率 80%，B 組 60%。加號代表設限。"><text x="12" y="20">估計存活率</text><g stroke="#344b53"><path d="M64 40H493M64 108H493M64 176H493"/><path d="M64 35V210H493"/></g><text x="18" y="45">100%</text><text x="25" y="114">60%</text><text x="25" y="181">20%</text><path d="M64 40H136V57H210V74H356V91H430V108H490" fill="none" stroke="#a5efcc" stroke-width="3"/><path d="M64 40H110V57H165V74H210V91H282V108H356V125H430V159H490" fill="none" stroke="#f4d88d" stroke-width="3" stroke-dasharray="8 4"/><path d="M282 35V210" stroke="#789398" stroke-dasharray="3 5"/><text x="241" y="68" fill="#a5efcc">A：80%</text><text x="284" y="130">B：60%</text><text x="384" y="98">+</text><text x="390" y="132">+</text><text x="60" y="233">0</text><text x="276" y="233">6</text><text x="475" y="233">12</text><text x="220" y="259">追蹤時間（月）</text><text x="399" y="22">+ 設限</text></svg><div class="small">實線 A 組 · 虛線 B 組｜簡化教學圖，未呈現在險人數與 CI。</div></div>`;}
+
+const courseStages=[['健康資料與研究設計','HEALTH DATA'],['事件時間與設限','TIME & CENSORING'],['KM 與生命表','SURVIVAL CURVES'],['Cox 與 HR 解讀','COX REGRESSION'],['描述統計與 SAS','DESCRIPTIVE STATS'],['統計推論與報告','INFERENCE']];
+const lectures=[null,{name:'教材 1｜2026/09/09',file:'115.1 健康數據科學概論_1_09092026.pdf',pages:56},{name:'教材 2｜2026/09/16',file:'115.1 健康數據科學概論_2_09162026.pptx',pages:39},{name:'教材 3｜2026/09/30',file:'115.1 健康數據科學概論_3_09302026 (2).pdf',pages:44}];
+let mode='course',questions=courseQuestions,stages=courseStages,TOTAL=questions.length,MAX_XP=TOTAL*20,current=0,answers=[],hinted=new Set(),started=false;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function lines(s,n=24){const chars=Array.from(s),out=[];for(let i=0;i<chars.length;i+=n)out.push(chars.slice(i,i+n).join(''));return out;}
+function svgText(x,y,s,anchor='middle',fill='#d5e6e4',size=17){return `<text x="${x}" y="${y}" text-anchor="${anchor}" fill="${fill}" font-size="${size}">${esc(s)}</text>`;}
+function wrapText(x,y,s,n=25){return lines(s,n).map((line,i)=>svgText(x,y+i*23,line)).join('');}
+function figure(v,prompt=false){
+ if(!v)return '';let inside='',height=300;
+ const line=(x1,y1,x2,y2,color='#536f78',dash='')=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="2" ${dash?`stroke-dasharray="${dash}"`:''}/>`;
+ const dot=(x,y,c='#a5efcc',r=6)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${c}"/>`;
+ let content='';
+ if(v.kind==='table'){
+  content=`<div class="tablewrap" tabindex="0" role="region" aria-label="${esc(v.title)}"><table><thead><tr>${v.heads.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${v.rows.map(r=>`<tr>${r.map((c,i)=>`<${i?'td':'th scope="row"'}>${esc(c)}</${i?'td':'th'}>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+ }else{
+  if(v.kind==='flow'){
+   let y=16;v.items.forEach((item,i)=>{const ls=lines(item,25),h=ls.length*23+23;inside+=`<rect x="18" y="${y}" width="484" height="${h}" rx="10" fill="${i===v.items.length-1?'#234238':'#20323a'}" stroke="${i===v.items.length-1?'#7fbb9e':'#47616b'}"/>`+wrapText(260,y+28,item);y+=h;if(i<v.items.length-1){inside+=line(260,y+3,260,y+20,'#a5efcc')+`<path d="M254 ${y+14}L260 ${y+21}L266 ${y+14}" fill="none" stroke="#a5efcc" stroke-width="2"/>`;y+=26;}});height=y+16;
+  }else if(v.kind==='timeline'){
+   height=260;inside+=line(100,205,480,205);[0,4,8,12].forEach(t=>inside+=svgText(100+t*30,231,t+' 月'));
+   v.rows.forEach((r,i)=>{let y=50+i*57,x=100+r[1]*30;inside+=svgText(15,y+5,r[0],'start')+line(100,y,x,y,'#a5efcc');inside+=r[2]?`<path d="M${x-6} ${y-6}l12 12m-12 0l12 -12" stroke="#f4d88d" stroke-width="3"/>`:line(x-7,y,x+7,y,'#a5efcc')+line(x,y-7,x,y+7,'#a5efcc');inside+=svgText(x+14,y+5,r[2]?'事件':'設限','start',r[2]?'#f4d88d':'#a5efcc',14);});
+  }else if(v.kind==='km'){
+   height=340;const x=t=>65+t*24,y=s=>238-s*195;inside+=line(65,40,65,238)+line(65,238,485,238);[0,.5,1].forEach(s=>inside+=line(65,y(s),485,y(s),'#324b53',s===.5?'5 5':'')+svgText(54,y(s)+5,(s*100)+'%','end'));[0,3,6,12,17].forEach(t=>inside+=svgText(x(t),263,t));inside+=svgText(275,288,'時間（教材未指定單位）');let path=`M${x(0)} ${y(1)}`,prev=1;[[3,.9],[4,.8],[6,4/7],[12,8/21],[15,4/21],[17,0]].forEach(([t,s])=>{path+=`H${x(t)}V${y(s)}`;prev=s;});path+='H485';inside+=`<path d="${path}" fill="none" stroke="#a5efcc" stroke-width="3"/>`;[[5,.8],[8,4/7],[10,4/7]].forEach(([t,s])=>inside+=line(x(t),y(s)-7,x(t),y(s)+7,'#f4d88d'));inside+=svgText(225,110,'S(6) ≈ 0.571','start','#a5efcc',15)+svgText(345,223,'S(12) ≈ 0.381','start','#a5efcc',14)+svgText(275,320,'事件前在險：t=3 → 10；t=6 → 7；t=12 → 3','middle','#b9cbce',14);
+  }else if(v.kind==='cross'){
+   inside+=line(60,32,60,240)+line(60,240,475,240);inside+=svgText(16,28,'S(t)','start')+svgText(267,278,'追蹤時間');inside+=`<path d="M60 45H125V60H200V95H270V154H350V201H460" fill="none" stroke="#a5efcc" stroke-width="3"/><path d="M60 45H100V90H160V125H245V139H330V151H460" fill="none" stroke="#f4d88d" stroke-width="3" stroke-dasharray="8 4"/>`;inside+=svgText(160,40,'A：實線','start','#a5efcc')+svgText(327,50,'B：虛線','start','#f4d88d');
+  }else if(v.kind==='hr'){
+   height=230;const x=n=>90+310*Math.log(n/.5)/Math.log(6);inside+=line(60,154,470,154);[.5,1,2,3].forEach(n=>inside+=svgText(x(n),182,n));inside+=line(x(1),38,x(1),156,'#f4d88d','5 5')+line(x(.92),99,x(2.58),99,'#a5efcc')+line(x(.92),89,x(.92),109,'#a5efcc')+line(x(2.58),89,x(2.58),109,'#a5efcc')+dot(x(1.54),99);inside+=svgText(x(1.54),71,'1.54 [0.92–2.58]')+svgText(265,215,'HR（對數刻度）');
+  }else if(v.kind==='dots'){
+   height=255;const x=n=>40+n*21;inside+=line(40,125,480,125);v.values.forEach(n=>inside+=dot(x(n),125));[0,5,10,15,20].forEach(n=>inside+=svgText(x(n),155,n));inside+=line(x(v.mean),55,x(v.mean),115,'#f4d88d','4 3')+line(x(v.median),170,x(v.median),133,'#a5efcc','4 3')+svgText(x(v.mean),43,'平均 = '+v.mean,'middle','#f4d88d')+svgText(x(v.median),196,'中位數 = '+v.median,'middle','#a5efcc')+svgText(280,235,'費用（千元）');
+  }else if(v.kind==='spread'){
+   height=240;const x=n=>100+n*35;[65,145].forEach((y,i)=>{inside+=line(100,y,450,y)+svgText(36,y+6,i?'B':'A');(i?[0,5,10]:[4,5,6]).forEach(n=>inside+=dot(x(n),y,i?'#f4d88d':'#a5efcc'));});[0,5,10].forEach(n=>inside+=svgText(x(n),196,n));inside+=line(x(5),30,x(5),170,'#aabdc1','4 5')+svgText(275,227,'平均皆為 5');
+  }else if(v.kind==='box'){
+   height=260;const x=n=>45+n*21;inside+=line(x(1),105,x(20),105)+`<rect x="${x(2.5)}" y="70" width="84" height="70" fill="#244c3d" stroke="#a5efcc" stroke-width="2"/>`+line(x(4.5),70,x(4.5),140,'#f4d88d')+line(x(1),86,x(1),124)+line(x(20),86,x(20),124);inside+=svgText(x(2.5),57,'Q1=2.5')+svgText(x(6.5)+26,57,'Q3=6.5');inside+=svgText(x(1),165,'1')+svgText(x(20),165,'20')+svgText(273,206,'IQR = 6.5 − 2.5 = 4','middle','#a5efcc')+svgText(273,236,'全距 = 20 − 1 = 19');
+  }else if(v.kind==='hist'){
+   height=285;inside+=line(54,35,54,235)+line(54,235,486,235);[2,7,12,7,3,2,5,11,8,3].forEach((n,i)=>inside+=`<rect x="${60+i*42}" y="${235-n*14}" width="39" height="${n*14}" fill="#80c7aa"/>`);[0,6,12].forEach(n=>inside+=svgText(44,240-n*14,n,'end'));inside+=svgText(20,22,'人數','start')+svgText(272,272,'健康指標（等寬區間）');
+  }else if(v.kind==='estimator'){
+   height=245;inside+=line(60,144,460,144)+line(260,50,260,177,'#f4d88d','5 4');[135,170,205,235,260,285,315,350,385].forEach((x,i)=>inside+=dot(x,100+(i%3)*16));inside+=svgText(260,211,'母體真值 μ','middle','#f4d88d')+svgText(260,31,'每個圓點代表一次抽樣的估計','middle','#cfe0e1',15);
+  }else if(v.kind==='ci'){
+   height=325;inside+=line(280,20,280,265,'#f4d88d','5 4');[[180,325],[230,390],[290,410],[160,300],[235,355],[175,305]].forEach(([a,b],i)=>{let y=45+i*38,c=a>280?'#ffa9a3':'#a5efcc';inside+=svgText(25,y+5,'樣本 '+(i+1),'start','#c6d9dc',15)+line(a,y,b,y,c)+dot((a+b)/2,y,c,4);});inside+=svgText(280,290,'固定的母體真值','middle','#f4d88d')+svgText(280,316,'紅色區間未涵蓋真值','middle','#ffa9a3',15);
+  }else if(v.kind==='normal'){
+   height=300;const x=z=>260+64*z,y=z=>235-175*Math.exp(-z*z/2);let pts=[];for(let z=-3.5;z<=3.51;z+=.05)pts.push([z,x(z),y(z)]);const path=pts.map((p,i)=>(i?'L':'M')+p[1].toFixed(2)+' '+p[2].toFixed(2)).join(' ');inside+=line(30,235,490,235);[-1,1].forEach(sign=>{let subset=pts.filter(p=>sign<0?p[0]<=-1.96:p[0]>=1.96);inside+=`<path d="M${subset[0][1]} 235 ${subset.map(p=>'L'+p[1]+' '+p[2]).join(' ')}L${subset[subset.length-1][1]} 235Z" fill="#f4d88d"/>`;});inside+=`<path d="${path}" fill="none" stroke="#a5efcc" stroke-width="3"/>`;[-1.96,0,1.96].forEach(z=>inside+=line(x(z),235,x(z),y(z),'#8ba3a7','3 4')+svgText(x(z),261,z));inside+=svgText(260,139,'中央約 95%')+svgText(67,192,'2.5%','middle','#f4d88d')+svgText(451,192,'2.5%','middle','#f4d88d')+svgText(260,292,'Z（標準常態）');
+  }else if(v.kind==='errors'){
+   content=`<div class="tablewrap" tabindex="0" role="region" aria-label="檢定決策表"><table><thead><tr><th>決策／真相</th><th>H₀ 為真</th><th>指定的 H₁ 為真</th></tr></thead><tbody><tr><th>拒絕 H₀</th><td class="errorcell">第一類錯誤 α</td><td>檢定力 1−β</td></tr><tr><th>未拒絕 H₀</th><td>正確保留</td><td class="errorcell">第二類錯誤 β</td></tr></tbody></table></div>`;
+  }
+  if(!content)content=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 ${height}" role="img" aria-label="${esc(v.title)}"><title>${esc(v.title)}</title>${inside}</svg>`;
+ }
+ return `<figure class="learning-figure"><figcaption>${esc(v.title)}</figcaption><div class="visual-scroll" tabindex="0" role="region" aria-label="圖解，可左右滑動">${content}</div>${v.caption&&!prompt?`<p class="small">${esc(v.caption)}</p>`:''}<p class="figure-note">${v.kind==='km'?'教材資料重繪':'原創教學圖解'} · ${prompt?'先觀察圖表，再選答案':'搭配上方步驟閱讀'} · 窄螢幕可左右滑動圖表</p></figure>`;
+}
+function sourceMarkup(q){if(!q.source)return '';return `<div class="source-note"><b>回到課堂教材</b>${q.source.map(([n,p])=>`<span>${lectures[n].name} · ${n===2?'投影片':'PDF 頁'} ${esc(p)}</span>`).join('')}<span>${q.supplement?'本題含研究方法延伸補充。':'題目依教材主題改編，解析補充必要假設。'}</span></div>`;}
+function explanation(q){if(!q.steps)return `<p>${q.explain}</p>`;return `<div class="explain-steps"><h4>一步一步想</h4><ol>${q.steps.map(t=>`<li>${esc(t)}</li>`).join('')}</ol></div>${figure(q.visual)}<div class="option-reasons"><h4>為什麼其他選項不適合？</h4>${q.why.map((w,i)=>`<p><b>${'ABC'[i]}${i===q.answer?' ✓':''}</b> ${esc(w)}</p>`).join('')}</div>${sourceMarkup(q)}`;}
+function update(){const xp=answers.filter((a,i)=>a===questions[i].answer).length*20;$('xp').textContent=xp+' / '+MAX_XP;$('level').textContent='Lv. '+Math.floor(xp/50);$('progress').max=TOTAL;$('progress').value=answers.length;$('progress').textContent=answers.length+' / '+TOTAL;$('progressText').textContent=answers.length+' / '+TOTAL;$('map').innerHTML=stages.map((s,i)=>{const complete=questions.every((q,j)=>q.stage!==i||j<answers.length),active=started&&current<TOTAL&&questions[current].stage===i;return `<li class="${complete?'done':active?'active':''}" ${active?'aria-current="step"':''} title="${s[0]}"><span class="node">${complete?'✓':String(i+1).padStart(2,'0')}</span><span class="label">${s[0]}<small>${s[1]} · ${questions.filter(q=>q.stage===i).length} 題</small></span></li>`}).join('');}
+function focusTitle(){const el=$('viewTitle');if(el)el.focus({preventScroll:true});$('main').scrollIntoView({block:'start',behavior:'auto'});}
+function setMode(next){mode=next;questions=mode==='course'?courseQuestions:classicQuestions;stages=mode==='course'?courseStages:classicStages;TOTAL=questions.length;MAX_XP=TOTAL*20;current=0;answers=[];hinted=new Set();started=false;home();}
+function sourcesPanel(){return `<details><summary>教材範圍與解讀提醒</summary><div class="source-list">${lectures.slice(1).map(l=>`<p><b>${l.name}</b><br>${l.file}<br><span class="small">${l.pages} ${l===lectures[2]?'張投影片':'頁'}</span></p>`).join('')}</div><p class="small">頁碼依原檔順序，封面算第 1 頁。題目是教學改編，不是授課教師原題；虛構數值與原教材範例會分別註明。</p><ul class="small"><li>CI 包含 1 表示仍有不確定性，不能直接斷言「沒有效果」。</li><li>Log-rank 利用各事件時點，不只看後期；Wilcoxon 通常較重視早期。</li><li>匹配與 Cox 調整都不能保證消除所有混雜；半參數模型仍有假設。</li></ul><p class="small">延伸核對：<a href="https://support.sas.com/documentation/cdl/en/statug/68162/HTML/default/statug_lifetest_details16.htm" target="_blank" rel="noopener noreferrer">SAS：存活曲線比較</a>、<a href="https://support.sas.com/documentation/cdl/en/statug/66859/HTML/default/statug_phreg_overview.htm" target="_blank" rel="noopener noreferrer">SAS：Cox 模型</a>、<a href="https://support.sas.com/documentation/cdl/en/statug/68162/HTML/default/statug_lifetest_syntax07.htm" target="_blank" rel="noopener noreferrer">SAS：事件與競爭事件</a>、<a href="https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf" target="_blank" rel="noopener noreferrer">ASA：p 值解讀</a>。</p></details>`;}
+function home(){update();$('botText').textContent='先自己判斷，再看圖解。算錯不是失敗，找出分母與假設才是重點。';$('screen').innerHTML=`<section class="fade"><div class="eyebrow">PAPER QUEST / COURSE EDITION</div><h1 id="viewTitle" tabindex="-1">讀懂研究，<br>也<span>看懂數據</span>。</h1><p class="lead">從課堂概念走到研究判讀。用圖解拆開公式，理解每個答案背後的理由。</p><div class="mode-picker" role="group" aria-label="選擇題庫"><button class="mode ${mode==='course'?'selected':''}" id="courseMode" aria-pressed="${mode==='course'}"><b>課堂圖解篇</b><span>48 題 · 三份教材 · 分步解析</span></button><button class="mode ${mode==='classic'?'selected':''}" id="classicMode" aria-pressed="${mode==='classic'}"><b>論文閱讀篇</b><span>30 題 · 論文架構與批判思考</span></button></div><div class="story"><div class="small">研究所 · 本週 Lab Meeting</div><p>教授：「這次除了結論，也請說明設限、分析方法與不確定性。」</p><p><b style="color:var(--mint)">Paper Bot：</b>「${mode==='course'?'我們從資料與事件開始，接著讀 KM、Cox 和統計推論。每題都有圖解，也能回查教材頁碼。':'先掌握論文架構，再練習研究設計與證據判讀。'}」</p></div><div class="startrow"><button class="primary" id="start">開始${mode==='course'?'課堂圖解':'論文閱讀'}挑戰 →</button><span class="small">約 ${mode==='course'?'45–60':'25–35'} 分鐘 · 提示不扣分</span></div><div class="features"><span><b>06</b> 個關卡</span><span><b>${TOTAL}</b> 道題目</span><span><b>${MAX_XP}</b> XP 上限</span></div><p class="small">答對 +20 XP，每 50 XP 升 1 級。答錯也能繼續。每題選擇後顯示解析；重新整理或切換題庫會清空本次進度。</p>${mode==='course'?sourcesPanel():''}</section>`;$('start').onclick=()=>{started=true;render();};$('courseMode').onclick=()=>setMode('course');$('classicMode').onclick=()=>setMode('classic');}
+function render(){update();const q=questions[current];$('botText').textContent=mode==='course'?['先問研究問題，再決定資料與分母。','事件與設限分開記，觀察時間才有意義。','每一階都有自己的分母；不要一路用初始人數。','先確認比較組與單位，再解讀 HR。','先看分布，再選描述數字與 SAS 程序。','把設計、效應量、CI 與限制一起說清楚。'][q.stage]:['先看地圖，再找線索。','用一句話整理研究問題。','研究者有沒有分派介入？','數字要連同假設一起讀。','先看軸線與分母。','把證據與限制一起說明。'][q.stage];$('screen').innerHTML=`<section class="card fade"><div class="qtop"><span class="eyebrow">MISSION 0${q.stage+1} / ${stages[q.stage][0]}</span><span class="pill">答對 +20 XP</span></div><div class="small" style="margin-top:16px">挑戰 ${String(current+1).padStart(2,'0')} / ${TOTAL} · ${q.difficulty}</div><h2 id="viewTitle" tabindex="-1">${q.title}</h2>${q.body?`<p class="lead">${q.body}</p>`:''}${q.passage?`<div class="passage">${q.passage}</div>`:''}${q.chart?chart(q.chart):''}${q.promptVisual?figure(q.visual,true):''}<div class="options" role="group" aria-label="選擇一個答案">${q.options.map((o,i)=>`<button class="option" data-choice="${i}"><span class="letter">${'ABC'[i]}</span><span>${o}</span></button>`).join('')}</div><div class="actions"><button class="secondary" id="hintBtn" aria-expanded="false" aria-controls="hint">✧ Paper Bot 提示</button><span class="small">選擇後可看${mode==='course'?'圖解與逐項':'中文'}解析</span></div><div class="hint" id="hint" hidden>🤖 ${q.hint}</div><div id="feedback"></div><div class="actions next-row"><span id="answerStatus" role="status" aria-live="polite"></span><button class="primary" id="next" hidden>下一題 →</button></div></section>`;document.querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>answer(Number(b.dataset.choice)));$('hintBtn').onclick=()=>{const show=$('hint').hidden;$('hint').hidden=!show;$('hintBtn').setAttribute('aria-expanded',String(show));if(show)hinted.add(current);};$('next').onclick=()=>{if(answers.length!==current+1)return;current++;if(current===TOTAL)finish();else render();};focusTitle();}
+function answer(choice){if(answers.length>current||current>=TOTAL||!Number.isInteger(choice)||choice<0||choice>=questions[current].options.length)return;const q=questions[current];answers.push(choice);document.querySelectorAll('[data-choice]').forEach(b=>{const n=Number(b.dataset.choice);b.disabled=true;if(n===q.answer)b.classList.add('correct');else if(n===choice)b.classList.add('wrong');if(n===q.answer)b.querySelector('.letter').textContent='✓';else if(n===choice)b.querySelector('.letter').textContent='×';});const correct=choice===q.answer;$('feedback').innerHTML=`<div class="feedback ${correct?'':'bad'}"><h3 tabindex="-1" id="explanationTitle">${correct?'✦ 線索破解！+20 XP':'✧ 找到需要釐清的觀念！+0 XP'}</h3><p><b>正確答案：${'ABC'[q.answer]}</b> · ${q.options[q.answer]}</p>${explanation(q)}</div>`;$('answerStatus').textContent=correct?'答對！已增加 20 XP。':'已顯示正確答案與解析。';$('next').hidden=false;$('next').textContent=current===TOTAL-1?'查看學習成果 →':questions[current+1].stage!==q.stage?'前往下一關 →':'下一題 →';update();$('explanationTitle').focus({preventScroll:true});$('feedback').scrollIntoView({block:'start',behavior:'auto'});}
+function finish(){update();const correct=answers.filter((a,i)=>a===questions[i].answer).length,ratio=correct/TOTAL,title=ratio>=.85?'研究探索家':ratio>=.6?'論文解碼員':'勇敢的新手研究者';$('botText').textContent='學習不只看分數。回顧答錯的概念，再回教材讀一次，會更有收穫。';$('screen').innerHTML=`<section class="card fade"><div class="eyebrow">MISSION COMPLETE / 學習完成</div><h1 id="viewTitle" tabindex="-1" style="font-size:34px">你好，<span>${title}</span>！</h1><p class="lead">已完成${mode==='course'?'課堂圖解篇':'論文閱讀篇'}的六個關卡。</p><div class="resultscore"><div class="scorecircle"><strong>${Math.round(ratio*100)}<span style="font-size:16px"> 分</span></strong><span class="small">答對 ${correct} / ${TOTAL}</span></div><div><h3>${correct*20} Research XP · Lv. ${Math.floor(correct*20/50)}</h3><p class="small">使用提示 ${hinted.size} 題，不影響分數。<br>這是練習回饋，不代表正式課程成績。</p></div></div><div class="summarygrid">${stages.map((s,i)=>{const ids=questions.map((q,j)=>q.stage===i?j:-1).filter(j=>j>=0);return `<div class="summaryitem"><span>${i+1}. ${s[0]}</span><b>${ids.filter(j=>answers[j]===questions[j].answer).length} / ${ids.length}</b></div>`}).join('')}</div><div class="review-toolbar"><h3>題目回顧與詳解</h3><label><input type="checkbox" id="wrongOnly"> 只看答錯的題目</label></div><p id="reviewCount" class="small"></p><div id="reviewList"></div>${mode==='course'?sourcesPanel():''}<div class="actions"><button class="primary" id="restart">↻ 重新挑戰本篇</button><button class="secondary" id="returnHome">返回首頁選題庫</button></div></section>`;const review=()=>{const wrongOnly=$('wrongOnly').checked,ids=questions.map((_,i)=>i).filter(i=>!wrongOnly||answers[i]!==questions[i].answer);$('reviewCount').textContent=ids.length?'顯示 '+ids.length+' 題；展開題目可看完整解析。':'全部答對，沒有錯題！';$('reviewList').innerHTML=ids.map(i=>{const q=questions[i];return `<details class="review"><summary>${answers[i]===q.answer?'✓':'△'} ${i+1}. ${q.title}</summary>${q.body?`<p>${q.body}</p>`:''}${q.passage?`<div class="passage">${q.passage}</div>`:''}${q.chart?chart(q.chart):''}<p>你的答案：${'ABC'[answers[i]]} · ${q.options[answers[i]]}<br><b>正確答案：${'ABC'[q.answer]} · ${q.options[q.answer]}</b></p>${explanation(q)}</details>`}).join('');};$('wrongOnly').onchange=review;review();$('restart').onclick=()=>{current=0;answers=[];hinted=new Set();started=true;render();};$('returnHome').onclick=()=>{setMode(mode);focusTitle();};focusTitle();}
+home();
+
+</script></body></html>
